@@ -1,36 +1,78 @@
 "use client";
 
-import { KineticMarquee } from "@/components/kinetic-marquee";
+import { useRef } from "react";
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 
-const items = [
-  { value: "12.4M", label: "Impulses" },
-  { value: "0.08s", label: "Latch time" },
-  { value: "48", label: "Channels" },
-  { value: "∞", label: "Loops" },
-  { value: "240%", label: "Overprint" },
+const valueClass =
+    "text-[clamp(2rem,6vw,4rem)] font-black leading-none tracking-tighter";
+
+const labelClass = "text-xs font-bold uppercase tracking-widest md:text-sm";
+
+function Diamond() {
+    return (
+        <span className="select-none text-xl font-black md:text-2xl" aria-hidden>
+            ♦
+        </span>
+    );
+}
+
+function StatItem({ value, label }: { value: string; label: string }) {
+    return (
+        <div className="flex items-baseline gap-2 md:gap-3">
+            <span className={valueClass}>{value}</span>
+            <span className={labelClass}>{label}</span>
+        </div>
+    );
+}
+
+const stats = [
+    { value: "99.99%", label: "Uptime SLA" },
+    { value: "24/7", label: "Support Access" },
+    { value: "$10M+", label: "Custom Coverage" },
+    { value: "0.08s", label: "Latch Time" },
+    { value: "48", label: "Channels" },
+    { value: "∞", label: "Loops" },
 ];
 
-export function StatMarquee() {
-  return (
-    <KineticMarquee
-      speed={85}
-      className="bg-accent text-accent-foreground"
-      trackClassName="text-accent-foreground"
-    >
-      {items.map((item) => (
-        <div
-          key={item.label}
-          className="flex items-baseline gap-3 pr-4 text-accent-foreground md:pr-8"
-        >
-          <span className="text-[clamp(2.5rem,8vw,5rem)] font-bold leading-none tracking-tighter">
-            {item.value}
-          </span>
-          <span className="text-sm font-bold uppercase tracking-widest md:text-base">
-            {item.label}
-          </span>
-          <span className="pl-6 text-2xl font-black md:pl-10 md:text-3xl">✶</span>
+function Track({ speed = 60 }: { speed?: number }) {
+    const trackRef = useRef<HTMLDivElement>(null);
+    const x = useMotionValue(0);
+
+    useAnimationFrame((_, delta) => {
+        const trackWidth = trackRef.current?.scrollWidth ?? 0;
+        const halfWidth = trackWidth / 2;
+        if (halfWidth === 0) return;
+        let next = x.get() - (speed * delta) / 1000;
+        if (Math.abs(next) >= halfWidth) next = 0;
+        x.set(next);
+    });
+
+    const items = (
+        <div className="flex shrink-0 items-center gap-8 py-6 md:gap-12 md:py-8">
+            {stats.map((stat, i) => (
+                <div key={i} className="flex shrink-0 items-center gap-8 md:gap-12">
+                    <StatItem value={stat.value} label={stat.label} />
+                    <Diamond />
+                </div>
+            ))}
         </div>
-      ))}
-    </KineticMarquee>
-  );
+    );
+
+    return (
+        <div className="overflow-hidden">
+            <motion.div ref={trackRef} style={{ x }} className="flex w-max">
+                {items}
+                {/* duplicate for seamless loop */}
+                {items}
+            </motion.div>
+        </div>
+    );
+}
+
+export function StatMarquee({ speed = 60 }: { speed?: number }) {
+    return (
+        <div className="border-y-2 border-border bg-accent text-accent-foreground">
+            <Track speed={speed} />
+        </div>
+    );
 }
