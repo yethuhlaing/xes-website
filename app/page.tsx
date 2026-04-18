@@ -6,6 +6,7 @@ import { ProcessGrid } from "@/components/process-grid";
 import { Skiper58 } from "@/components/text-roll";
 import { StatMarquee } from "@/components/stat-marquee";
 import { StickyFeatures } from "@/components/sticky-features";
+import { ScrollRevealSection } from "@/components/scroll-reveal-section";
 import { WhyChooseUs } from "@/components/why-choose-us";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
                 </section>
                 <StatMarquee />
 
+                <ScrollRevealSection />
                 <WhyChooseUs />
                 <section id="archive" className="scroll-mt-20">
                     <ProcessGrid />
