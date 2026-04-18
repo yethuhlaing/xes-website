@@ -42,11 +42,16 @@ export function WhyChooseUs() {
                                 />
 
                                 {/* content row */}
-                                <div className="relative flex items-center justify-between gap-8 py-7 md:py-8">
+                                <div
+                                    className="
+                                        relative flex flex-col items-start gap-4 py-7
+                                        md:flex-row md:items-center md:justify-between md:gap-8 md:py-8
+                                    "
+                                >
                                     {/* left: title — shifts right on hover */}
                                     <h2
                                         className="
-                                            text-[clamp(1.6rem,4vw,3.5rem)] font-bold
+                                            text-[clamp(2rem,5.5vw,4.5rem)] font-bold
                                             uppercase leading-none tracking-tighter
                                             text-foreground
                                             translate-x-0
@@ -59,19 +64,16 @@ export function WhyChooseUs() {
                                         {item.title}
                                     </h2>
 
-                                    {/* right: description — shifts left on hover */}
+                                    {/* right: description — visible; subtle shift on hover */}
                                     <p
                                         className="
-                                            hidden max-w-xs text-right text-sm font-medium
-                                            leading-snug tracking-tight text-muted-foreground
-                                            opacity-0
-                                            translate-x-0
-                                            transition-[transform,opacity] duration-300
+                                            max-w-full text-base font-medium leading-snug tracking-tight
+                                            text-muted-foreground md:text-lg md:leading-relaxed
+                                            transition-transform duration-300
                                             ease-[cubic-bezier(0.22,1,0.36,1)]
-                                            group-hover:-translate-x-4
-                                            group-hover:opacity-100
-                                            md:block
+                                            md:max-w-sm md:text-right
                                             md:group-hover:-translate-x-8
+                                            group-hover:-translate-x-1
                                         "
                                     >
                                         {item.body}
