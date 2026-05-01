@@ -1,16 +1,16 @@
 import { MobileStaggerNav } from "@/components/mobile-stagger-nav";
 
 const links = [
-    { href: "#signal", label: "Signal" },
-    { href: "#velocity", label: "Velocity" },
-    { href: "#voices", label: "Voices" },
-    { href: "#contact", label: "Contact" },
+    { href: "/about", label: "About" },
+    { href: "/event", label: "Event" },
+    { href: "/volunteer", label: "Volunteer" },
+    { href: "/contact", label: "Contact" },
 ];
 
 export function KineticHeader() {
     return (
         <>
-            <header className="sticky top-0 z-50 hidden border-b-2 border-border bg-background/90 backdrop-blur-sm md:block">
+            <header className="sticky top-0 z-50 hidden bg-background/90 backdrop-blur-sm md:block">
                 <div className="mx-auto flex h-16 max-w-[95vw] items-center justify-between px-4 md:px-8">
                     <a
                         href="#main"
@@ -33,7 +33,7 @@ export function KineticHeader() {
                         ))}
                     </nav>
                     <a
-                        href="#contact"
+                        href="/contact"
                         className="text-xs font-bold uppercase tracking-tight text-foreground underline decoration-accent decoration-2 underline-offset-4 md:text-sm"
                     >
                         Book

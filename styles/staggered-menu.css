@@ -55,14 +55,14 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #e9e9ef;
+    color: var(--foreground);
     font-weight: 500;
     line-height: 1;
     overflow: visible;
 }
 
 .sm-toggle:focus-visible {
-    outline: 2px solid #ffffffaa;
+    outline: 2px solid hsl(var(--ring) / 0.75);
     outline-offset: 4px;
     border-radius: 4px;
 }
@@ -132,7 +132,7 @@
     right: 0;
     width: clamp(260px, 38vw, 420px);
     height: 100%;
-    background: white;
+    background: hsl(var(--card));
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
@@ -193,7 +193,7 @@
     margin: 0;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--sm-accent, #ff0000);
+    color: var(--sm-accent, hsl(var(--primary)));
 }
 
 .sm-socials-list {
@@ -220,7 +220,7 @@
 }
 
 .sm-socials-link:focus-visible {
-    outline: 2px solid var(--sm-accent, #ff0000);
+    outline: 2px solid var(--sm-accent, hsl(var(--primary)));
     outline-offset: 3px;
 }
 
@@ -235,7 +235,7 @@
 .sm-socials-link {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #111;
+    color: var(--foreground);
     text-decoration: none;
     position: relative;
     padding: 2px 0;
@@ -246,14 +246,14 @@
 }
 
 .sm-socials-link:hover {
-    color: var(--sm-accent, #ff0000);
+    color: var(--sm-accent, hsl(var(--primary)));
 }
 
 .sm-panel-title {
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--foreground);
     text-transform: uppercase;
 }
 
@@ -268,7 +268,7 @@
 
 .sm-panel-item {
     position: relative;
-    color: #000;
+    color: var(--foreground);
     font-weight: 600;
     font-size: 3.5rem;
     cursor: pointer;
@@ -308,7 +308,7 @@
 }
 
 .sm-panel-item:hover {
-    color: var(--sm-accent, #5227ff);
+    color: var(--sm-accent, hsl(var(--secondary)));
 }
 
 .sm-panel-list[data-numbering] {
@@ -323,7 +323,7 @@
     right: 2.8em;
     font-size: 18px;
     font-weight: 400;
-    color: var(--sm-accent, #5227ff);
+    color: var(--sm-accent, hsl(var(--secondary)));
     letter-spacing: 0;
     pointer-events: none;
     user-select: none;
@@ -357,12 +357,11 @@
 /* XES site: dark panel + accent; keep logo readable */
 .staggered-menu-wrapper.xes-stagger-menu .staggered-menu-panel {
     background: color-mix(in oklab, var(--background) 92%, transparent);
-    border-left: 2px solid var(--border);
 }
 
 .staggered-menu-wrapper.xes-stagger-menu[data-position="left"] .staggered-menu-panel {
     border-left: none;
-    border-right: 2px solid var(--border);
+    border-right: none;
 }
 
 .staggered-menu-wrapper.xes-stagger-menu .sm-panel-item {

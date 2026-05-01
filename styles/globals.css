@@ -1,17 +1,61 @@
 @import "tailwindcss";
 
-/*
- * Kinetic typography theme — adjust here for your brand book.
- * Mapped into Tailwind via @theme inline below.
- */
+@layer base {
+    :root {
+      /* === BASE COLORS === */
+      --background: #09090b;
+      --foreground: #fafafa;
+  
+      /* === SURFACE === */
+      --card: 0 0% 6%;
+      --card-foreground: 0 0% 100%;
+  
+      --popover: 0 0% 6%;
+      --popover-foreground: 0 0% 100%;
+  
+      /* === PRIMARY (gradient system anchor) === */
+      --primary: 260 60% 50%;         /* purple */
+      --primary-foreground: 0 0% 100%;
+  
+      /* === SECONDARY === */
+      --secondary: 310 85% 55%;         /* pink-magenta */
+      --secondary-foreground: 0 0% 100%;
+  
+      /* === MUTED === */
+      --muted: 0 0% 15%;
+      --muted-foreground: 0 0% 65%;
+  
+      /* === ACCENTS === */
+      --accent: 280 70% 55%;
+      --accent-foreground: 0 0% 100%;
+  
+      /* === STATUS === */
+      --destructive: 0 75% 55%;
+      --success: 142 70% 45%;
+  
+      /* === BORDER / INPUT === */
+      --border: 0 0% 15%;
+      --input: 0 0% 15%;
+      --ring: 310 85% 55%;
+  
+      /* === RADIUS === */
+      --radius: 0.75rem;
+  
+      /* === CUSTOM BRAND GRADIENT === */
+      --gradient-primary: linear-gradient(
+        135deg,
+        #ff2d95 0%,
+        #c026d3 40%,
+        #7c3aed 75%,
+        #4c1d95 100%
+      );
+    }
+  
+
+ 
+  }
+  
 :root {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --muted: #27272a;
-    --muted-foreground: #a1a1aa;
-    --accent: #dfe104;
-    --accent-foreground: #000000;
-    --border: #3f3f46;
     --selection-bg: var(--accent);
     --selection-fg: var(--accent-foreground);
 }
@@ -19,6 +63,10 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
     --color-accent: var(--accent);

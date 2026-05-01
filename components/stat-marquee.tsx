@@ -71,7 +71,7 @@ function Track({ speed = 60 }: { speed?: number }) {
 
 export function StatMarquee({ speed = 60 }: { speed?: number }) {
     return (
-        <div className="border-y-2 border-border bg-accent text-accent-foreground">
+        <div className="bg-primary text-primary-foreground">
             <Track speed={speed} />
         </div>
     );

@@ -7,24 +7,24 @@ import StaggeredMenu, {
 
 const menuItems: StaggeredMenuItem[] = [
     {
-        label: "Signal",
-        ariaLabel: "Go to Signal section",
-        link: "#signal",
+        label: "About",
+        ariaLabel: "Go to About page",
+        link: "/about",
     },
     {
-        label: "Velocity",
-        ariaLabel: "Go to Velocity section",
-        link: "#velocity",
+        label: "Event",
+        ariaLabel: "Go to Event page",
+        link: "/event",
     },
     {
-        label: "Voices",
-        ariaLabel: "Go to Voices section",
-        link: "#voices",
+        label: "Volunteer",
+        ariaLabel: "Go to Volunteer page",
+        link: "/volunteer",
     },
     {
         label: "Contact",
-        ariaLabel: "Go to Contact section",
-        link: "#contact",
+        ariaLabel: "Go to Contact page",
+        link: "/contact",
     },
 ];
 

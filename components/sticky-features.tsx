@@ -18,7 +18,7 @@ const features = [
 
 export function StickyFeatures() {
   return (
-    <section id="velocity" className="border-b-2 border-border py-24 md:py-32">
+    <section id="velocity" className="py-24 md:py-32">
       <div className="mx-auto w-full max-w-[95vw] px-4 md:px-8">
         <div className="mb-16 max-w-5xl">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground md:text-sm">
@@ -33,19 +33,19 @@ export function StickyFeatures() {
           {features.map((f, i) => (
             <article
               key={f.title}
-              className="group sticky top-24 border-2 border-border bg-background p-8 transition-colors duration-300 hover:border-accent hover:bg-accent md:top-32 md:p-12"
+              className="sticky top-24 bg-primary p-8 md:top-32 md:p-12"
               style={{ zIndex: i + 1 }}
             >
               <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent-foreground/70 md:text-sm">
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary-foreground/70 md:text-sm">
                     {f.kicker}
                   </p>
-                  <h3 className="mt-3 max-w-xl text-3xl font-bold uppercase tracking-tighter text-foreground transition-colors duration-300 group-hover:text-accent-foreground md:text-5xl lg:text-6xl">
+                  <h3 className="mt-3 max-w-xl text-3xl font-bold uppercase tracking-tighter text-primary-foreground md:text-5xl lg:text-6xl">
                     {f.title}
                   </h3>
                 </div>
-                <p className="max-w-xl text-lg font-medium leading-tight tracking-tight text-muted-foreground transition-colors duration-300 group-hover:text-accent-foreground/80 md:text-xl">
+                <p className="max-w-xl text-lg font-medium leading-tight tracking-tight text-primary-foreground/80 md:text-xl">
                   {f.body}
                 </p>
               </div>
