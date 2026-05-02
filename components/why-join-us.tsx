@@ -1,30 +1,34 @@
 const items = [
     {
-        title: "Save time and resources",
-        body: "Cut overhead and reclaim hours your team spends on manual work every week.",
+        title: "Community & events",
+        body: "Join excursions, trips, parties, and community events—we guide you into the startup ecosystem so you can explore it firsthand.",
     },
     {
-        title: "Improve team productivity",
-        body: "Give your team the tools they need to collaborate effectively and deliver results faster.",
+        title: "Network that grows with you",
+        body: "Meet like-minded students, professionals, and business owners who expand your professional circle beyond the classroom.",
     },
     {
-        title: "Scale with confidence",
-        body: "Build on infrastructure that grows with you—no rearchitecting required.",
+        title: "Pitch without pressure",
+        body: "Practice pitching in a relaxed atmosphere, build confidence in public speaking, and get feedback on your business ideas.",
     },
     {
-        title: "Stay organized",
-        body: "Keep every project, task, and conversation in one place so nothing slips through.",
+        title: "Internships & research",
+        body: "Complete your internship or research with XES, and plug into hands-on work that fits your goals.",
     },
 ];
 
-export function WhyChooseUs() {
+export function WhyJoinUs() {
     return (
         <section
             id="why"
+            aria-labelledby="why-choose-heading"
             className="scroll-mt-20 py-24 md:py-32 "
         >
             <div className="mx-auto w-full max-w-[95vw] px-4 md:px-8">
-                <p className="mb-12 text-xs font-bold uppercase tracking-widest text-accent md:text-sm">
+                <p
+                    id="why-choose-heading"
+                    className="mb-12 text-xs font-bold uppercase tracking-widest text-accent md:text-sm"
+                >
                     Why choose us?
                 </p>
 

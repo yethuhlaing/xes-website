@@ -28,8 +28,8 @@ export function AboutSection() {
                             key={i}
                             className={
                                 isLeft
-                                    ? "mr-auto w-full max-w-[min(100%,36rem)] md:max-w-[min(100%,42rem)]"
-                                    : "ml-auto w-full max-w-[min(100%,36rem)] text-right md:max-w-[min(100%,42rem)] text-secondary"
+                                    ? "mr-auto w-full max-w-[min(100%,42rem)] md:max-w-[min(100%,50rem)]"
+                                    : "ml-auto w-full max-w-[min(100%,42rem)] text-right md:max-w-[min(100%,50rem)] text-secondary"
                             }
                         >
                             <ScrollReveal
@@ -45,7 +45,6 @@ export function AboutSection() {
                                 rotationEnd="center center-=220"
                                 wordAnimationEnd="center center"
                                 containerClassName="text-balance"
-                                
                             >
                                 {text}
                             </ScrollReveal>

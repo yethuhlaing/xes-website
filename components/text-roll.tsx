@@ -7,8 +7,7 @@ import { cn } from "@/lib/cn";
 
 const navigationItems = [
     { name: "Home", href: "#main" },
-    { name: "Why join", href: "#why-join" },
-    { name: "Archive", href: "#archive" },
+    { name: "Why join", href: "#why" },
     { name: "Velocity", href: "#velocity" },
     { name: "Voices", href: "#voices" },
     { name: "Contact", href: "#contact" },

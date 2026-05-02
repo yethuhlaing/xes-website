@@ -1,4 +1,4 @@
-import { MobileStaggerNav } from "@/components/mobile-stagger-nav";
+import { MobileStaggerNav } from "@/components/navbar/navbar-mobile";
 
 const links = [
     { href: "/about", label: "About" },
@@ -7,7 +7,7 @@ const links = [
     { href: "/contact", label: "Contact" },
 ];
 
-export function KineticHeader() {
+export function Navbar() {
     return (
         <>
             <header className="sticky top-0 z-50 hidden bg-background/90 backdrop-blur-sm md:block">

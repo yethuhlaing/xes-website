@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 
+import { CtaBand } from "@/components/footer";
+import { Navbar } from "@/components/navbar/navbar";
 import "@/styles/globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -21,7 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} h-full scroll-smooth`}>
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
+        <div className="relative isolate flex min-h-full flex-1 flex-col overflow-x-clip">
+          <Navbar />
+          <main id="main" className="flex flex-1 flex-col">
+            {children}
+          </main>
+          <CtaBand />
+        </div>
+      </body>
     </html>
   );
 }

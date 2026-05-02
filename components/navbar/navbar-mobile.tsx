@@ -3,7 +3,7 @@
 import StaggeredMenu, {
     type StaggeredMenuItem,
     type StaggeredMenuSocialItem,
-} from "@/components/staggered-menu";
+} from "@/components/navbar/staggered-menu";
 
 const menuItems: StaggeredMenuItem[] = [
     {
@@ -45,7 +45,7 @@ export function MobileStaggerNav() {
                 openMenuButtonColor="#fafafa"
                 changeMenuColorOnOpen={false}
                 colors={["#27272a", "#3f3f46", "#18181b"]}
-                logoUrl="/xes-logo.svg"
+                logoUrl="/logo.svg"
                 accentColor="var(--accent)"
                 closeOnClickAway
             />
