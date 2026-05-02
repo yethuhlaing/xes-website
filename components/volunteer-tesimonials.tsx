@@ -44,7 +44,7 @@ const defaultTestimonials: AboutTestimonial[] = [
     },
 ];
 
-export function AboutTestimonialsCarousel({
+export function VolunteerTestimonialsCarousel({
     testimonials = defaultTestimonials,
 }: {
     testimonials?: AboutTestimonial[];

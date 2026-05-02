@@ -72,7 +72,8 @@ const CenterImage = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
                 clipPath,
                 backgroundSize,
                 opacity,
-                backgroundImage: "url(/images/1.JPG)",
+                backgroundImage:
+                    "url(https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop)",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}

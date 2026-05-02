@@ -7,12 +7,51 @@ import { useState } from "react";
 import { cn } from "@/lib/cn";
 
 const defaultImages: { src: string; alt: string; code: string }[] = [
-    { src: "/images/1.JPG", alt: "Placeholder photo 1", code: "# 01" },
-    { src: "/images/2.jpg", alt: "Placeholder photo 2", code: "# 02" },
-    { src: "/images/3.JPG", alt: "Placeholder photo 3", code: "# 03" },
-    { src: "/images/4.jpg", alt: "Placeholder photo 4", code: "# 04" },
-    { src: "/images/5.jpg", alt: "Placeholder photo 5", code: "# 05" },
-    { src: "/images/6.jpg", alt: "Placeholder photo 6", code: "# 06" },
+    {
+        src: "/images/x.com/13.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/32.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/20.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/21.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/19.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/1.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/2.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/3.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
+    {
+        src: "/images/x.com/4.jpeg",
+        alt: "Illustrations by my fav AarzooAly",
+        code: "# 23",
+    },
 ];
 
 export function Skiper52({

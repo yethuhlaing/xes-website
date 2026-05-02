@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { AboutTestimonialsCarousel } from "@/components/volunteer-tesimonials";
-import WhatYouGet from "@/components/what-you-get";
+import { VolunteerTestimonialsCarousel } from "@/components/volunteer-tesimonials";
+import WhatWeDo from "@/components/what-we-do";
 
 export const metadata: Metadata = {
     title: "About — XES",
@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <>
-            <WhatYouGet />
+            <WhatWeDo />
             <section
                 aria-label="Community testimonials"
                 className=" bg-white py-16 text-neutral-900 md:py-24"
             >
                 <div className="mx-auto max-w-[95vw] px-4 md:px-8">
-                    <AboutTestimonialsCarousel />
+                    <VolunteerTestimonialsCarousel />
                 </div>
             </section>
         </>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { MobileStaggerNav } from "@/components/navbar/navbar-mobile";
 
 const links = [
@@ -13,10 +15,18 @@ export function Navbar() {
             <header className="sticky top-0 z-50 hidden bg-background/90 backdrop-blur-sm md:block">
                 <div className="mx-auto flex h-16 max-w-[95vw] items-center justify-between px-4 md:px-8">
                     <a
-                        href="#main"
-                        className="text-sm font-bold uppercase tracking-tighter text-foreground md:text-base"
+                        href="/"
+                        aria-label="XES"
+                        className="relative flex h-10 w-10 shrink-0 items-center justify-center md:h-11 md:w-11"
                     >
-                        XES / Lab
+                        <Image
+                            src="/logo.png"
+                            alt=""
+                            width={144}
+                            height={144}
+                            className="object-contain"
+                            priority
+                        />
                     </a>
                     <nav
                         aria-label="Primary"
