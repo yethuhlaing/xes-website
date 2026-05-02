@@ -1,11 +1,10 @@
 import { CtaBand } from "@/components/cta-band";
-import HeroText from "@/components/hero-text";
 import { KineticHeader } from "@/components/kinetic-header";
-import { ProcessGrid } from "@/components/process-grid";
+import { WhyJoinCommunity } from "@/components/why-join-community";
 import { Skiper58 } from "@/components/text-roll";
 import { StatMarquee } from "@/components/stat-marquee";
 import { StickyFeatures } from "@/components/sticky-features";
-import { ScrollRevealSection } from "@/components/scroll-reveal-section";
+import { AboutSection } from "@/components/about-section";
 import { WhyChooseUs } from "@/components/why-choose-us";
 import Hero from "@/components/hero";
 import BentoGrid from "@/components/bento-grid";
@@ -22,7 +21,6 @@ export default function Home() {
                     className="min-h-[100dvh] md:min-h-[calc(100dvh-4rem)]"
                 >
                     <Hero />
-                    {/* <HeroText text="IMMERSE" /> */}
                 </section>
 
                 <section aria-label="Bento showcase">
@@ -38,13 +36,13 @@ export default function Home() {
                 </section>
                 <StatMarquee />
                 <Gallery />
-                <ScrollRevealSection />
+                <AboutSection />
                 <section aria-label="Testimonials">
                     <Testimonials />
                 </section>
                 <WhyChooseUs />
                 <section id="archive" className="scroll-mt-20">
-                    <ProcessGrid />
+                    <WhyJoinCommunity />
                 </section>
                 <StickyFeatures />
                 <CtaBand />

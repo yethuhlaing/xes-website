@@ -8,9 +8,13 @@ import "@/styles/scroll-reveal.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+export type ScrollRevealAs = "h2" | "div" | "p";
+
 export type ScrollRevealProps = {
     children: ReactNode;
-    /** Applied to the outer `h2` for anchors and `aria-labelledby`. */
+    /** Root element; use `div` or `p` for long prose so headings stay semantic. */
+    as?: ScrollRevealAs;
+    /** Applied to the outer heading or block for anchors and `aria-labelledby`. */
     id?: string;
     scrollContainerRef?: RefObject<HTMLElement | null>;
     enableBlur?: boolean;
@@ -25,6 +29,8 @@ export type ScrollRevealProps = {
     textClassName?: string;
     rotationEnd?: string;
     wordAnimationEnd?: string;
+    /** Transform origin for the scrubbed rotation (e.g. `"100% 50%"` for right-aligned blocks). */
+    rotationTransformOrigin?: string;
     /**
      * Pin this block until the scrubbed timeline finishes (stack-style section),
      * then release and let the page scroll normally. Uses one timeline + ScrollTrigger `pin`.
@@ -46,6 +52,7 @@ export type ScrollRevealProps = {
 
 export function ScrollReveal({
     children,
+    as = "h2",
     id,
     scrollContainerRef,
     enableBlur = true,
@@ -58,13 +65,14 @@ export function ScrollReveal({
     textClassName = "",
     rotationEnd = "bottom bottom",
     wordAnimationEnd = "bottom bottom",
+    rotationTransformOrigin = "0% 50%",
     pin = false,
     pinStart = "top top+=112",
     pinScrollEnd,
     pinScrub = 0.55,
 }: ScrollRevealProps) {
     const pinRootRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLHeadingElement>(null);
+    const containerRef = useRef<HTMLHeadingElement | HTMLDivElement | HTMLParagraphElement>(null);
 
     const splitText = useMemo(() => {
         const text = typeof children === "string" ? children : "";
@@ -124,8 +132,8 @@ export function ScrollReveal({
 
                 tl.fromTo(
                     el,
-                    { transformOrigin: "0% 50%", rotate: baseRotation },
-                    { rotate: 0, ease: "none", duration: 0.36 },
+                    { transformOrigin: rotationTransformOrigin, rotate: baseRotation },
+                    { transformOrigin: rotationTransformOrigin, rotate: 0, ease: "none", duration: 0.36 },
                     0,
                 );
 
@@ -155,10 +163,11 @@ export function ScrollReveal({
 
             gsap.fromTo(
                 el,
-                { transformOrigin: "0% 50%", rotate: baseRotation },
+                { transformOrigin: rotationTransformOrigin, rotate: baseRotation },
                 {
                     ease: "none",
                     rotate: 0,
+                    transformOrigin: rotationTransformOrigin,
                     scrollTrigger: {
                         trigger: el,
                         scroller,
@@ -224,6 +233,7 @@ export function ScrollReveal({
         baseOpacity,
         rotationEnd,
         wordAnimationEnd,
+        rotationTransformOrigin,
         blurStrength,
         wordOffsetY,
         wordStagger,
@@ -232,17 +242,27 @@ export function ScrollReveal({
         pinStart,
         pinScrollEnd,
         pinScrub,
+        as,
     ]);
 
-    const heading = (
-        <h2
-            ref={containerRef}
-            id={id}
-            className={`scroll-reveal ${containerClassName}`.trim()}
-        >
-            <span className={`scroll-reveal-text ${textClassName}`.trim()}>{splitText}</span>
-        </h2>
-    );
+    const rootClassName = `scroll-reveal ${containerClassName}`.trim();
+    const spanClassName = `scroll-reveal-text ${textClassName}`.trim();
+    const inner = <span className={spanClassName}>{splitText}</span>;
+
+    const heading =
+        as === "div" ? (
+            <div ref={containerRef} id={id} className={rootClassName}>
+                {inner}
+            </div>
+        ) : as === "p" ? (
+            <p ref={containerRef} id={id} className={rootClassName}>
+                {inner}
+            </p>
+        ) : (
+            <h2 ref={containerRef} id={id} className={rootClassName}>
+                {inner}
+            </h2>
+        );
 
     if (pin) {
         return <div className="scroll-reveal-pin-root" ref={pinRootRef}>{heading}</div>;

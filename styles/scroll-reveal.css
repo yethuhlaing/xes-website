@@ -4,10 +4,43 @@
 }
 
 .scroll-reveal-text {
-    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-size: clamp(2rem, 6vw, 4.25rem);
     line-height: 1.14;
     font-weight: 600;
     letter-spacing: -0.02em;
+}
+
+/* Readable body copy for long-form sections (e.g. About). */
+.scroll-reveal-text.scroll-reveal-text--prose {
+    font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+    line-height: 1.45;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+@keyframes about-text-shimmer {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.about-text-highlight {
+    background: linear-gradient(
+        100deg,
+        var(--foreground) 0%,
+        hsl(var(--secondary)) 35%,
+        hsl(var(--primary)) 55%,
+        var(--foreground) 100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: about-text-shimmer 7s ease-in-out infinite;
 }
 
 .word {
