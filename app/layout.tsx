@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
         <div className="relative isolate flex min-h-full flex-1 flex-col overflow-x-clip">
           <Navbar />
-          <main id="main" className="flex flex-1 flex-col">
+          <main id="main" className="flex min-h-0 flex-1 flex-col">
             {children}
           </main>
           <CtaBand />

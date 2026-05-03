@@ -37,14 +37,14 @@ const defaultTestimonials: AboutTestimonial[] = [
         role: "Project Manager 2023",
     },
     {
-        img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=112&h=112&fit=crop&q=80",
+        img: "/images/5.jpg",
         quote: "Being a XES volunteer has been my ticket to cool and boundless opportunities. Joining XES has personally enriched my journey, offering new skills, valuable connections, and experiences beyond my expectations.",
         name: "Xenia Thoma",
         role: "Partnership Lead 2023",
     },
 ];
 
-export function VolunteerTestimonialsCarousel({
+export function VolunteerTestimonials({
     testimonials = defaultTestimonials,
 }: {
     testimonials?: AboutTestimonial[];
@@ -71,10 +71,10 @@ export function VolunteerTestimonialsCarousel({
             <button
                 key={index}
                 type="button"
-                className={`flex min-w-[10.5rem] max-w-[11rem] flex-col items-center gap-1 rounded-xl border px-4 py-3 text-center transition-[color,box-shadow,background-color,border-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-fuchsia-500/50 dark:focus-visible:ring-offset-zinc-950 ${
+                className={`flex min-w-[10.5rem] max-w-[11rem] flex-col items-center gap-1 rounded-xl border px-4 py-3 text-center transition-[color,box-shadow,background-color,border-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-primary/50 dark:focus-visible:ring-offset-zinc-950 ${
                     isActive
-                        ? "border-fuchsia-400/80 bg-fuchsia-500/[0.08] shadow-sm shadow-fuchsia-900/5"
-                        : "border-zinc-200/90 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40 dark:border-zinc-700 dark:bg-zinc-900/40 dark:hover:border-fuchsia-600/50 dark:hover:bg-fuchsia-950/20"
+                        ? "border-primary/80 bg-primary/[0.08] shadow-sm shadow-primary/5"
+                        : "border-border/90 bg-white hover:border-primary/20 hover:bg-primary/5/40 dark:border-zinc-700 dark:bg-zinc-900/40 dark:hover:border-primary/60/50 dark:hover:bg-primary/95/20"
                 }`}
                 onClick={() => {
                     setActive(index);
@@ -84,7 +84,7 @@ export function VolunteerTestimonialsCarousel({
                 <span
                     className={`text-sm font-semibold leading-tight ${
                         isActive
-                            ? "text-fuchsia-950 dark:text-fuchsia-100"
+                            ? "text-foreground dark:text-foreground"
                             : "text-zinc-900 dark:text-zinc-100"
                     }`}
                 >
@@ -141,14 +141,14 @@ export function VolunteerTestimonialsCarousel({
                             leaveTo="z-0 opacity-0 -translate-x-3"
                         >
                             <div className="flex flex-col items-center gap-5">
-                                <p className="text-2xl font-bold leading-snug text-fuchsia-900 before:content-['\201C'] after:content-['\201D']">
+                                <p className="text-2xl font-bold leading-snug text-foreground before:content-['\201C'] after:content-['\201D']">
                                     {testimonial.quote}
                                 </p>
                                 <div className="flex flex-col gap-0.5 text-center">
-                                    <span className="text-base font-semibold tracking-tight text-fuchsia-950">
+                                    <span className="text-base font-semibold tracking-tight text-foreground">
                                         {testimonial.name}
                                     </span>
-                                    <span className="text-sm font-normal text-fuchsia-800/70">
+                                    <span className="text-sm font-normal text-foreground/70">
                                         {testimonial.role}
                                     </span>
                                 </div>

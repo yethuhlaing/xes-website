@@ -1,28 +1,22 @@
 import { StatMarquee } from "@/components/stat-marquee";
-import { StickyFeatures } from "@/components/sticky-features";
 import { AboutSection } from "@/components/xes";
 import { WhyJoinUs } from "@/components/why-join-us";
-import Hero from "@/components/hero";
+
 import Gallery from "@/components/gallery";
 import { Testimonials } from "@/components/testimonials";
+import Hero from "@/components/hero";
 
 export default function Home() {
     return (
         <>
-            <section
-                aria-label="Hero"
-                className="min-h-[100dvh] md:min-h-[calc(100dvh-4rem)]"
-            >
-                <Hero />
-            </section>
+            <Hero />
             <StatMarquee />
-            <Gallery />
             <AboutSection />
+            <Gallery />
             <section aria-label="Testimonials">
                 <Testimonials />
             </section>
             <WhyJoinUs />
-            <StickyFeatures />
         </>
     );
 }

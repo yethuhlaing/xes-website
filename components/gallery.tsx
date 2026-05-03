@@ -26,6 +26,16 @@ type ScheduleItemProps = {
 
 const SECTION_HEIGHT = 1400;
 
+/** Local gallery assets in `public/images/` (extensions match files on disk). */
+const GALLERY_IMAGES = [
+    "/images/1.JPG",
+    "/images/2.jpg",
+    "/images/3.JPG",
+    "/images/4.jpg",
+    "/images/5.jpg",
+    "/images/6.jpg",
+] as const;
+
 export default function Gallery() {
     return (
         <ReactLenis root>
@@ -72,8 +82,7 @@ const CenterImage = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
                 clipPath,
                 backgroundSize,
                 opacity,
-                backgroundImage:
-                    "url(https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop)",
+                backgroundImage: `url(${GALLERY_IMAGES[0]})`,
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}
@@ -82,36 +91,50 @@ const CenterImage = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
 };
 
 const ParallaxImages = () => {
+    const [, ...parallaxSrcs] = GALLERY_IMAGES;
+    const parallaxItems: ParallaxImgProps[] = [
+        {
+            src: parallaxSrcs[0],
+            alt: "Gallery image 2",
+            start: -200,
+            end: 200,
+            className: "w-1/3",
+        },
+        {
+            src: parallaxSrcs[1],
+            alt: "Gallery image 3",
+            start: 200,
+            end: -250,
+            className: "mx-auto w-2/3",
+        },
+        {
+            src: parallaxSrcs[2],
+            alt: "Gallery image 4",
+            start: -200,
+            end: 200,
+            className: "ml-auto w-1/3",
+        },
+        {
+            src: parallaxSrcs[3],
+            alt: "Gallery image 5",
+            start: 0,
+            end: -500,
+            className: "ml-24 w-5/12",
+        },
+        {
+            src: parallaxSrcs[4],
+            alt: "Gallery image 6",
+            start: -150,
+            end: 150,
+            className: "mr-auto w-2/5",
+        },
+    ];
+
     return (
         <div className="mx-auto max-w-5xl px-4 pt-[200px]">
-            <ParallaxImg
-                src="https://images.unsplash.com/photo-1484600899469-230e8d1d59c0?q=80&w=2670&auto=format&fit=crop"
-                alt="A space launch"
-                start={-200}
-                end={200}
-                className="w-1/3"
-            />
-            <ParallaxImg
-                src="https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?q=80&w=2670&auto=format&fit=crop"
-                alt="A spacecraft over Earth"
-                start={200}
-                end={-250}
-                className="mx-auto w-2/3"
-            />
-            <ParallaxImg
-                src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=2370&auto=format&fit=crop"
-                alt="Orbiting satellite"
-                start={-200}
-                end={200}
-                className="ml-auto w-1/3"
-            />
-            <ParallaxImg
-                src="https://images.unsplash.com/photo-1494022299300-899b96e49893?q=80&w=2670&auto=format&fit=crop"
-                alt="Launch plume"
-                start={0}
-                end={-500}
-                className="ml-24 w-5/12"
-            />
+            {parallaxItems.map((item) => (
+                <ParallaxImg key={item.src} {...item} />
+            ))}
         </div>
     );
 };

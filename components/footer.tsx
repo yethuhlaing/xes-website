@@ -105,11 +105,7 @@ const STYLES = `
   line-height: 0.75;
   font-weight: 900;
   letter-spacing: -0.05em;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 5%, transparent);
-  background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 10%, transparent) 0%, transparent 60%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 12%, transparent);
 }
 
 .footer-text-glow {
@@ -197,7 +193,7 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
 MagneticButton.displayName = "MagneticButton";
 
 const MarqueeItem = () => (
-    <div className="flex items-center space-x-12 px-6">
+    <div className="flex items-center space-x-12 px-6 ">
         <span>Haaga-Helia</span> <span className="text-primary/60">✦</span>
         <span>Student founders</span> <span className="text-secondary/60">✦</span>
         <span>Co-founders & crews</span> <span className="text-primary/60">✦</span>
@@ -288,13 +284,17 @@ export function CtaBand() {
 
                     <div
                         ref={giantTextRef}
-                        className="footer-giant-bg-text pointer-events-none absolute -bottom-[5vh] left-1/2 z-[1] -translate-x-1/2 select-none whitespace-nowrap"
+                        className={cn(
+                            "footer-giant-bg-text pointer-events-none absolute -bottom-[5vh] left-1/2 z-[1] -translate-x-1/2 select-none whitespace-nowrap",
+                            "bg-[linear-gradient(165deg,rgb(0_0_0/0.52)_0%,rgb(9_9_11/0.42)_32%,color-mix(in_oklch,var(--foreground)_9%,transparent)_52%,hsl(var(--primary)/0.05)_72%,transparent_100%)]",
+                            "bg-clip-text text-transparent [-webkit-text-fill-color:transparent]",
+                        )}
                     >
                         XES
                     </div>
 
-                    <div className="absolute left-0 top-18 z-10 w-full -rotate-3 scale-110 overflow-hidden border-y border-border/50 bg-background/60 py-4 shadow-2xl backdrop-blur-md">
-                        <div className="flex w-max animate-footer-scroll-marquee text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground md:text-sm">
+                    <div className="absolute left-0 top-18 z-10 w-full -rotate-3 scale-110 overflow-hidden border-y border-primary bg-background/60 py-4 shadow-2xl backdrop-blur-md">
+                        <div className="flex w-max animate-footer-scroll-marquee text-xs uppercase tracking-[0.3em] md:text-sm">
                             <MarqueeItem />
                             <MarqueeItem />
                         </div>

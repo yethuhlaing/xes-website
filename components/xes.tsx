@@ -42,8 +42,8 @@ export function AboutSection() {
                                 wordOffsetY={40}
                                 wordStagger={0.05}
                                 rotationTransformOrigin={isLeft ? "0% 50%" : "100% 50%"}
-                                rotationEnd="center center-=220"
-                                wordAnimationEnd="center center"
+                                rotationEnd="center center+=80"
+                                wordAnimationEnd="center center+=220"
                                 containerClassName="text-balance"
                             >
                                 {text}
