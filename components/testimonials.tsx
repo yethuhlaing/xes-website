@@ -47,88 +47,90 @@ export function Testimonials() {
     };
 
     return (
-        <div className="flex flex-col items-center gap-12 py-20 md:py-24">
-            <div className="relative px-8">
-                <span className="pointer-events-none absolute -left-3 -top-8 select-none font-serif text-8xl text-foreground/[0.06] md:text-9xl">
-                    "
-                </span>
+        <div className="mx-auto w-full max-w-6xl px-4 py-20 md:py-24">
+            <div className="grid min-h-[min(72vh,38rem)] w-full grid-rows-[1fr_auto] text-center sm:min-h-[min(68vh,40rem)]">
+                <div className="relative flex min-h-[12rem] w-full flex-col items-center justify-center self-stretch px-8 py-6 sm:min-h-[14rem] sm:py-8">
+                    <span className="pointer-events-none absolute -left-3 -top-4 select-none font-serif text-8xl text-primary md:-top-8 md:text-9xl">
+                        "
+                    </span>
 
-                <p
-                    className={cn(
-                        "max-w-4xl text-center text-[1.55rem] font-medium leading-relaxed text-foreground transition-all duration-300 ease-out md:text-4xl md:leading-[1.25]",
-                        isAnimating ? "scale-[0.98] opacity-0 blur-sm" : "scale-100 opacity-100 blur-0",
-                    )}
-                >
-                    {displayedQuote}
-                </p>
+                    <p
+                        className={cn(
+                            "max-w-4xl text-center text-[1.55rem] font-medium leading-relaxed text-foreground transition-all duration-300 ease-out md:text-4xl md:leading-[1.25]",
+                            isAnimating ? "scale-[0.98] opacity-0 blur-sm" : "scale-100 opacity-100 blur-0",
+                        )}
+                    >
+                        {displayedQuote}
+                    </p>
 
-                <span className="pointer-events-none absolute -bottom-10 -right-3 select-none font-serif text-8xl text-foreground/[0.06] md:text-9xl">
-                    "
-                </span>
-            </div>
+                    <span className="pointer-events-none absolute -bottom-6 -right-3 select-none font-serif text-8xl text-primary md:-bottom-10 md:text-9xl">
+                        "
+                    </span>
+                </div>
 
-            <div className="mt-4 flex flex-col items-center gap-7">
-                <p
-                    className={cn(
-                        "text-sm uppercase tracking-[0.16em] text-muted-foreground transition-all duration-500 ease-out md:text-base",
-                        isAnimating ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100",
-                    )}
-                >
-                    {testimonials[activeIndex].author}, {displayedRole}
-                </p>
+                <div className="flex shrink-0 flex-col items-center gap-7 pt-8 pb-1 ">
+                    <p
+                        className={cn(
+                            "text-sm uppercase tracking-[0.16em] text-muted-foreground transition-all duration-500 ease-out md:text-base",
+                            isAnimating ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100",
+                        )}
+                    >
+                        {testimonials[activeIndex].author}, {displayedRole}
+                    </p>
 
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                    {testimonials.map((testimonial, index) => {
-                        const isActive = activeIndex === index;
-                        const isHovered = hoveredIndex === index && !isActive;
-                        const showName = isActive || isHovered;
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                        {testimonials.map((testimonial, index) => {
+                            const isActive = activeIndex === index;
+                            const isHovered = hoveredIndex === index && !isActive;
+                            const showName = isActive || isHovered;
 
-                        return (
-                            <button
-                                key={testimonial.id}
-                                onClick={() => handleSelect(index)}
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                className={cn(
-                                    "relative flex cursor-pointer items-center gap-0 rounded-full",
-                                    "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
-                                    isActive ? "bg-foreground shadow-lg" : "bg-transparent hover:bg-muted/80",
-                                    showName ? "py-2.5 pl-2.5 pr-5" : "p-1",
-                                )}
-                            >
-                                <div className="relative shrink-0">
-                                    <img
-                                        src={testimonial.avatar || "/placeholder.svg"}
-                                        alt={testimonial.author}
-                                        className={cn(
-                                            "h-10 w-10 rounded-full object-cover md:h-11 md:w-11",
-                                            "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
-                                            isActive ? "ring-2 ring-background/30" : "ring-0",
-                                            !isActive && "hover:scale-105",
-                                        )}
-                                    />
-                                </div>
-
-                                <div
+                            return (
+                                <button
+                                    key={testimonial.id}
+                                    onClick={() => handleSelect(index)}
+                                    onMouseEnter={() => setHoveredIndex(index)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
                                     className={cn(
-                                        "grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
-                                        showName ? "ml-2 grid-cols-[1fr] opacity-100" : "ml-0 grid-cols-[0fr] opacity-0",
+                                        "relative flex cursor-pointer items-center gap-0 rounded-full",
+                                        "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                                        isActive ? "bg-foreground shadow-lg" : "bg-transparent hover:bg-muted/80",
+                                        showName ? "py-2.5 pl-2.5 pr-5" : "p-1",
                                     )}
                                 >
-                                    <div className="overflow-hidden">
-                                        <span
+                                    <div className="relative shrink-0">
+                                        <img
+                                            src={testimonial.avatar || "/placeholder.svg"}
+                                            alt={testimonial.author}
                                             className={cn(
-                                                "block whitespace-nowrap text-base font-semibold transition-colors duration-300 md:text-lg",
-                                                isActive ? "text-background" : "text-foreground",
+                                                "h-10 w-10 rounded-full object-cover md:h-11 md:w-11",
+                                                "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                                                isActive ? "ring-2 ring-background/30" : "ring-0",
+                                                !isActive && "hover:scale-105",
                                             )}
-                                        >
-                                            {testimonial.author}
-                                        </span>
+                                        />
                                     </div>
-                                </div>
-                            </button>
-                        );
-                    })}
+
+                                    <div
+                                        className={cn(
+                                            "grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                                            showName ? "ml-2 grid-cols-[1fr] opacity-100" : "ml-0 grid-cols-[0fr] opacity-0",
+                                        )}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <span
+                                                className={cn(
+                                                    "block whitespace-nowrap text-base font-semibold transition-colors duration-300 md:text-lg",
+                                                    isActive ? "text-background" : "text-foreground",
+                                                )}
+                                            >
+                                                {testimonial.author}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

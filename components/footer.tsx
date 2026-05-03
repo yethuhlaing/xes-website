@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { cn } from "@/lib/cn";
+import { useVolunteerApplication } from "@/components/site-modals-provider";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -108,6 +109,13 @@ const STYLES = `
   -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 12%, transparent);
 }
 
+@media (max-width: 639px) {
+  .footer-giant-bg-text {
+    font-size: 20vw;
+    line-height: 0.72;
+  }
+}
+
 .footer-text-glow {
   background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 40%, transparent) 100%);
   -webkit-background-clip: text;
@@ -193,7 +201,7 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
 MagneticButton.displayName = "MagneticButton";
 
 const MarqueeItem = () => (
-    <div className="flex items-center space-x-12 px-6 ">
+    <div className="flex items-center space-x-6 px-4 sm:space-x-12 sm:px-6">
         <span>Haaga-Helia</span> <span className="text-primary/60">✦</span>
         <span>Student founders</span> <span className="text-secondary/60">✦</span>
         <span>Co-founders & crews</span> <span className="text-primary/60">✦</span>
@@ -202,14 +210,8 @@ const MarqueeItem = () => (
     </div>
 );
 
-const FOOTER_NAV = [
-    { href: "/about", label: "About" },
-    { href: "/event", label: "Event" },
-    { href: "/volunteer", label: "Volunteer" },
-    { href: "/contact", label: "Contact" },
-] as const;
-
 export function CtaBand() {
+    const { open: openMemberApplication } = useVolunteerApplication();
     const wrapperRef = useRef<HTMLDivElement>(null);
     const giantTextRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
@@ -271,13 +273,13 @@ export function CtaBand() {
 
             <div
                 ref={wrapperRef}
-                className="relative h-screen w-full"
+                className="relative h-[100dvh] min-h-[100dvh] w-full"
                 style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
             >
                 <footer
                     id="contact"
                     aria-labelledby="cta-heading"
-                    className="cinematic-footer-wrapper fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground"
+                    className="cinematic-footer-wrapper fixed bottom-0 left-0 flex h-[100dvh] min-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-background text-foreground"
                 >
                     <div className="footer-aurora pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px]" />
                     <div className="footer-bg-grid pointer-events-none absolute inset-0 z-0" />
@@ -293,38 +295,42 @@ export function CtaBand() {
                         XES
                     </div>
 
-                    <div className="absolute left-0 top-18 z-10 w-full -rotate-3 scale-110 overflow-hidden border-y border-primary bg-background/60 py-4 shadow-2xl backdrop-blur-md">
-                        <div className="flex w-max animate-footer-scroll-marquee text-xs uppercase tracking-[0.3em] md:text-sm">
+                    <div className="absolute left-0 top-16 z-10 w-full overflow-hidden border-y border-primary bg-background/60 py-3 shadow-2xl backdrop-blur-md sm:top-[4.5rem] sm:py-4 sm:-rotate-3 sm:scale-110">
+                        <div className="flex w-max animate-footer-scroll-marquee text-[10px] uppercase tracking-[0.25em] sm:text-xs md:text-sm md:tracking-[0.3em]">
                             <MarqueeItem />
                             <MarqueeItem />
                         </div>
                     </div>
 
-                    <div className="relative z-10 mx-auto mt-20 flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6">
-                        <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-muted-foreground md:text-sm">
+                    <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-5xl flex-1 flex-col items-center justify-center px-4 pt-4 sm:px-6 sm:pt-6 md:pt-0">
+                        <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground sm:mb-4 sm:text-xs md:text-sm">
                             XES Helsinki
                         </p>
                         <h2
                             id="cta-heading"
                             ref={headingRef}
-                            className="footer-text-glow mb-6 text-center text-5xl font-black tracking-tighter md:text-8xl"
+                            className="footer-text-glow mb-5 text-center text-4xl font-black leading-[0.95] tracking-tighter sm:mb-8 sm:text-5xl md:text-8xl"
                         >
                             Build with us
                         </h2>
-                        <p className="mb-12 max-w-2xl text-center text-base font-medium leading-tight tracking-tight text-muted-foreground md:text-lg">
-                            Haaga-Helia&apos;s entrepreneurship society for students who want to start something real.
-                            Whether you are hunting a co-founder, your first customers, or a crew to learn with, this
-                            is where ideas meet momentum.
-                        </p>
+                        <div ref={linksRef} className="flex justify-center">
+                            <button
+                                type="button"
+                                onClick={openMemberApplication}
+                                className="inline-flex touch-manipulation items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-9 sm:py-4 sm:text-base"
+                            >
+                                Become a Member
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="relative z-10 w-full px-6 pb-8 md:px-12">
-                        <div className="flex w-full flex-col gap-10 pt-8 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:pt-10">
-                            <div className="text-left sm:max-w-[min(100%,20rem)]">
-                                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    <div className="relative z-10 w-full px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-2 sm:px-6 sm:pb-8 md:px-12">
+                        <div className="grid w-full grid-cols-2 gap-x-4 gap-y-8 pt-4 sm:flex sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:pt-8 md:pt-10">
+                            <div className="min-w-0 text-left sm:max-w-[min(100%,20rem)]">
+                                <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground sm:mb-4 sm:text-xs">
                                     Support
                                 </h3>
-                                <ul className="flex flex-col gap-3 text-sm font-medium text-foreground/90">
+                                <ul className="flex flex-col gap-2 text-xs font-medium text-foreground/90 sm:gap-3 sm:text-sm">
                                     <li>
                                         <Link
                                             href="/association-rules/en"
@@ -351,12 +357,12 @@ export function CtaBand() {
                                     </li>
                                 </ul>
                             </div>
-                            <div className="text-left sm:max-w-[min(100%,20rem)] sm:text-right">
-                                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                            <div className="min-w-0 text-left sm:max-w-[min(100%,20rem)] sm:text-right">
+                                <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground sm:mb-4 sm:text-xs">
                                     Contact info
                                 </h3>
                                 <address className="not-italic">
-                                    <ul className="flex flex-col gap-3 text-sm font-medium text-foreground/90">
+                                    <ul className="flex flex-col gap-2 text-xs font-medium text-foreground/90 sm:gap-3 sm:text-sm">
                                         <li>
                                             <a
                                                 href="mailto:hello@xeshelsinki.com"
@@ -384,8 +390,8 @@ export function CtaBand() {
                             </div>
                         </div>
 
-                        <div className="mt-10 flex w-full flex-col items-center justify-between gap-6 sm:flex-row">
-                            <p className="order-2 text-center text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:order-1 sm:text-left sm:text-xs">
+                        <div className="mt-6 flex w-full flex-row items-center justify-between gap-4 border-t border-border/40 pt-6 sm:mt-10 sm:border-t-0 sm:pt-0">
+                            <p className="min-w-0 flex-1 text-left text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:text-xs">
                                 © XES Helsinki 2024
                             </p>
 
@@ -394,7 +400,7 @@ export function CtaBand() {
                                 type="button"
                                 onClick={scrollToTop}
                                 aria-label="Back to top"
-                                className="footer-glass-pill group order-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:text-foreground sm:order-2"
+                                className="footer-glass-pill group flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-full text-muted-foreground hover:text-foreground sm:h-12 sm:w-12"
                             >
                                 <svg
                                     className="h-5 w-5 transform transition-transform duration-300 group-hover:-translate-y-1.5"

@@ -6,7 +6,7 @@ import {
     useScroll,
     useTransform,
 } from "framer-motion";
-import { ArrowRight, MapPin, Rocket } from "lucide-react";
+import { MapPin } from "lucide-react";
 import React, { useRef } from "react";
 
 type ParallaxImgProps = {
@@ -23,6 +23,9 @@ type ScheduleItemProps = {
     location: string;
 };
 
+/** Scroll budget (px) consumed while the center image grows — no other content visible. */
+const GROW_SCROLL = 1300;
+/** Scroll budget (px) for the parallax image phase. */
 const SECTION_HEIGHT = 2600;
 
 /** Local gallery assets in `public/images/` (extensions match files on disk). */
@@ -41,21 +44,35 @@ const PARALLAX_POOL = GALLERY_IMAGES.slice(1);
 export default function Gallery() {
     return (
         <div className="bg-background">
-            <Hero />
+            <GrowPhase />
+            <ParallaxPhase />
             <Schedule />
         </div>
     );
 }
 
-const Hero = () => {
+// Phase 1: center image pinned, grows from small box to full screen.
+// No other content visible — only scroll budget being consumed here.
+const GrowPhase = () => {
     const ref = useRef<HTMLDivElement>(null);
     return (
         <div
             ref={ref}
+            style={{ height: `calc(${GROW_SCROLL}px + 100vh)` }}
+            className="relative w-full"
+        >
+            <CenterImage containerRef={ref} />
+        </div>
+    );
+};
+
+// Phase 2: parallax images scroll normally after center image is gone.
+const ParallaxPhase = () => {
+    return (
+        <div
             style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
             className="relative w-full overflow-hidden"
         >
-            <CenterImage containerRef={ref} />
             <ParallaxImages />
             <div className="absolute bottom-0 left-0 right-0 h-[600px] bg-gradient-to-b from-zinc-950/0 to-zinc-950" />
         </div>
@@ -68,12 +85,14 @@ const CenterImage = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
         offset: ["start start", "end end"],
     });
 
-    const clip1 = useTransform(scrollYProgress, [0, 0.5], [25, 0]);
-    const clip2 = useTransform(scrollYProgress, [0, 0.5], [75, 100]);
+    // 0 → 0.8: small centered box expands to full screen
+    const clip1 = useTransform(scrollYProgress, [0, 0.8], [25, 0]);
+    const clip2 = useTransform(scrollYProgress, [0, 0.8], [75, 100]);
     const clipPath = useMotionTemplate`polygon(${clip1}% ${clip1}%, ${clip2}% ${clip1}%, ${clip2}% ${clip2}%, ${clip1}% ${clip2}%)`;
 
-    const backgroundSize = useTransform(scrollYProgress, [0, 1], ["170%", "100%"]);
-    const opacity = useTransform(scrollYProgress, [0.5, 1], [1, 0]);
+    const backgroundSize = useTransform(scrollYProgress, [0, 0.8], ["170%", "100%"]);
+    // 0.8 → 1: fade out as user approaches end of grow phase
+    const opacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]);
 
     return (
         <motion.div
