@@ -23,7 +23,7 @@ type ScheduleItemProps = {
     location: string;
 };
 
-const SECTION_HEIGHT = 1400;
+const SECTION_HEIGHT = 2600;
 
 /** Local gallery assets in `public/images/` (extensions match files on disk). */
 const GALLERY_IMAGES = [
@@ -34,6 +34,9 @@ const GALLERY_IMAGES = [
     "/images/5.jpg",
     "/images/6.jpg",
 ] as const;
+
+/** Images after the hero; cycled when we show more parallax slots than unique files. */
+const PARALLAX_POOL = GALLERY_IMAGES.slice(1);
 
 export default function Gallery() {
     return (
@@ -87,50 +90,30 @@ const CenterImage = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
     );
 };
 
+const PARALLAX_LAYOUT: Omit<ParallaxImgProps, "src" | "alt">[] = [
+    { start: -200, end: 200, className: "mb-20 w-1/3" },
+    { start: 200, end: -250, className: "mx-auto mb-20 w-2/3" },
+    { start: -200, end: 200, className: "mb-20 ml-auto w-1/3" },
+    { start: 0, end: -500, className: "mb-24 ml-24 w-5/12" },
+    { start: -150, end: 150, className: "mb-20 mr-auto w-2/5" },
+    { start: 180, end: -180, className: "mb-20 w-1/2" },
+    { start: -120, end: 220, className: "mb-20 ml-8 w-1/3" },
+    { start: 100, end: -320, className: "mb-24 mr-12 w-3/5" },
+    { start: -220, end: 100, className: "mb-20 mx-auto w-2/3" },
+    { start: 160, end: -160, className: "mb-16 ml-auto w-2/5" },
+];
+
 const ParallaxImages = () => {
-    const [, ...parallaxSrcs] = GALLERY_IMAGES;
-    const parallaxItems: ParallaxImgProps[] = [
-        {
-            src: parallaxSrcs[0],
-            alt: "Gallery image 2",
-            start: -200,
-            end: 200,
-            className: "w-1/3",
-        },
-        {
-            src: parallaxSrcs[1],
-            alt: "Gallery image 3",
-            start: 200,
-            end: -250,
-            className: "mx-auto w-2/3",
-        },
-        {
-            src: parallaxSrcs[2],
-            alt: "Gallery image 4",
-            start: -200,
-            end: 200,
-            className: "ml-auto w-1/3",
-        },
-        {
-            src: parallaxSrcs[3],
-            alt: "Gallery image 5",
-            start: 0,
-            end: -500,
-            className: "ml-24 w-5/12",
-        },
-        {
-            src: parallaxSrcs[4],
-            alt: "Gallery image 6",
-            start: -150,
-            end: 150,
-            className: "mr-auto w-2/5",
-        },
-    ];
+    const parallaxItems: ParallaxImgProps[] = PARALLAX_LAYOUT.map((layout, i) => ({
+        ...layout,
+        src: PARALLAX_POOL[i % PARALLAX_POOL.length]!,
+        alt: `Gallery photo ${i + 2}`,
+    }));
 
     return (
         <div className="mx-auto max-w-5xl px-4 pt-[200px]">
-            {parallaxItems.map((item) => (
-                <ParallaxImg key={item.src} {...item} />
+            {parallaxItems.map((item, index) => (
+                <ParallaxImg key={`${item.src}-${index}`} {...item} />
             ))}
         </div>
     );

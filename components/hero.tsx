@@ -683,12 +683,22 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
           @media (max-width: 900px) {
             .fx-content {
-              grid-template-columns: 1fr; row-gap: 3vh;
+              grid-template-columns: 1fr;
               place-items: center;
             }
-            .fx-left, .fx-right, .fx-center { height: auto; }
-            .fx-left, .fx-right { justify-items: center; }
-            .fx-track { transform: none !important; }
+            .fx-left, .fx-right { display: none; }
+            .fx-center {
+              height: 100%;
+              width: 100%;
+            }
+            .fx-featured-title {
+              font-size: clamp(2.8rem, 13vw, 5rem);
+              padding: 0 1rem;
+            }
+            .fx-header {
+              font-size: clamp(2.2rem, 11vw, 5rem);
+              padding-top: max(calc(env(safe-area-inset-top, 0px) + 4rem), 12vh);
+            }
           }
         `}</style>
       </div>
