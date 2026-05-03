@@ -4,7 +4,8 @@ export default function WhoAreWe() {
   return (
     <div className="min-h-screen w-full text-zinc-50 flex flex-col">
       <div className="flex-1 flex flex-col">
-        <section className="min-h-[100dvh] flex flex-col items-center justify-center relative px-6">
+        {/* md: subtract sticky header (h-16) so hero + navbar = one viewport and content stays visually centered */}
+        <section className="flex min-h-[100dvh] flex-col items-center justify-center px-6 md:min-h-[calc(100dvh-4rem)]">
           <div className="max-w-4xl w-full">
             <TextBlockAnimation
               blockColor="#6366f1"

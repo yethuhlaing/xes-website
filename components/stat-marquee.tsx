@@ -26,12 +26,12 @@ function StatItem({ value, label }: { value: string; label: string }) {
 }
 
 const stats = [
-    { value: "99.99%", label: "Uptime SLA" },
-    { value: "24/7", label: "Support Access" },
-    { value: "$10M+", label: "Custom Coverage" },
-    { value: "0.08s", label: "Latch Time" },
-    { value: "48", label: "Channels" },
-    { value: "∞", label: "Loops" },
+    { value: "5", label: "ECTS for volunteers" },
+    { value: "100%", label: "Student-led" },
+    { value: "All", label: "Backgrounds welcome" },
+    { value: "∞", label: "Ideas welcome" },
+    { value: "Build", label: "Learn by doing" },
+    { value: "360°", label: "Events & excursions" },
 ];
 
 function Track({ speed = 60 }: { speed?: number }) {

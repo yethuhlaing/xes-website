@@ -11,6 +11,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { flushSync } from "react-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -236,6 +237,12 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
       lastIndexRef.current = to;
       const down = to > from;
 
+      // Commit active section before GSAP: otherwise `.fx-featured.active` still
+      // points at `from` while outgoing words fade and `to` stays visibility:hidden.
+      flushSync(() => {
+        if (!isControlled) setLocalIndex(to);
+      });
+
       const killTargets: object[] = [
         ...bgRefs.current.filter(Boolean),
         ...wordRefs.current.flat().filter(Boolean),
@@ -246,7 +253,6 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
       if (rightTrackRef.current) killTargets.push(rightTrackRef.current);
       killTargets.forEach((t) => gsap.killTweensOf(t));
 
-      if (!isControlled) setLocalIndex(to);
       onIndexChange?.(to);
 
       if (currentNumberRef.current) {
@@ -669,7 +675,8 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-featured { position: absolute; opacity: 0; visibility: hidden; }
           .fx-featured.active { opacity: 1; visibility: visible; }
           .fx-featured-title {
-            margin: 0; color: var(--fx-text);
+            margin: 0;
+            color: var(--fx-text);
             font-weight: 900; letter-spacing: -0.01em;
             font-size: clamp(2rem, 7.5vw, 6rem);
           }
@@ -681,7 +688,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
           }
           .fx-footer-title { color: var(--fx-text); font-size: clamp(1.6rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.01em; line-height: 0.9; }
           .fx-progress { width: 200px; height: 2px; margin: 1rem auto 0; background: rgba(245,245,245,0.28); position: relative; }
-          .fx-progress-fill { position: absolute; inset: 0 auto 0 0; width: 0%; background: var(--fx-text); height: 100%; transition: width 0.3s ease; }
+          .fx-progress-fill { position: absolute; inset: 0 auto 0 0; width: 0%; background: hsl(var(--primary)); height: 100%; transition: width 0.3s ease; }
           .fx-progress-numbers { position: absolute; inset: auto 0 100% 0; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--fx-text); }
 
           @media (max-width: 900px) {

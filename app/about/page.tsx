@@ -15,7 +15,14 @@ export default function AboutPage() {
         <>
             <WhoAreWe />
             <WhatWeDo />
-            
+            <section
+                aria-label="Community testimonials"
+                className="bg-primary/10 py-16 md:py-24"
+            >
+                <div className="mx-auto max-w-[95vw] px-4 md:px-8">
+                    <VolunteerTestimonials />
+                </div>
+            </section>
         </>
     );
 }

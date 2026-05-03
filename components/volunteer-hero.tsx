@@ -5,7 +5,8 @@ import {
   ContainerSticky,
   GalleryCol,
   GalleryContainer,
-} from "@/components/animated-gallery"
+} from "@/components/animated-gallery";
+import { VolunteerApplyButton } from "@/components/volunteer-apply-button";
 
 /** All files in `public/images/` — used only for the scroll gallery (12 slots, 7 unique). */
 const LOCAL_GALLERY_IMAGES = [
@@ -46,6 +47,12 @@ const IMAGES_3 = pickColumn(6)
                 where applicable, and a team that cares about your CV and your
                 network—not just the shift roster.
               </p>
+            </ContainerAnimated>
+
+            <ContainerAnimated className="mt-6">
+              <VolunteerApplyButton className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-8 text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-md transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+                Become a Volunteer
+              </VolunteerApplyButton>
             </ContainerAnimated>
           </ContainerStagger>
         </div>
