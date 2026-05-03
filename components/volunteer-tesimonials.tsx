@@ -128,7 +128,7 @@ export function VolunteerTestimonials({
                 </div>
             </div>
             <div className="flex min-h-[12rem] w-full flex-col items-center justify-center self-stretch px-2 py-6 sm:min-h-[14rem] sm:py-8">
-                <div className="relative flex w-full max-w-2xl flex-col">
+                <div className="relative flex w-full max-w-5xl flex-col">
                     {testimonials.map((testimonial, index) => (
                         <Transition
                             key={index}
@@ -141,7 +141,7 @@ export function VolunteerTestimonials({
                             leaveTo="z-0 opacity-0 -translate-x-3"
                         >
                             <div className="flex flex-col items-center gap-5">
-                                <p className="text-2xl font-bold leading-snug text-foreground before:content-['\201C'] after:content-['\201D']">
+                                <p className="text-4xl font-bold leading-snug text-foreground before:content-['\201C'] after:content-['\201D']">
                                     {testimonial.quote}
                                 </p>
                                 <div className="flex flex-col gap-0.5 text-center">

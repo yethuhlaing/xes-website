@@ -45,7 +45,7 @@ export function MobileStaggerNav() {
                 openMenuButtonColor="#fafafa"
                 changeMenuColorOnOpen={false}
                 colors={["#27272a", "#3f3f46", "#18181b"]}
-                logoUrl="/logo.svg"
+                logoUrl="/logo.png"
                 accentColor="var(--accent)"
                 closeOnClickAway
             />

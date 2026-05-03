@@ -51,7 +51,7 @@ export function StaggeredMenu({
     displaySocials = true,
     displayItemNumbering = true,
     className,
-    logoUrl = "/logo.svg",
+    logoUrl = "/logo.png",
     menuButtonColor = "#fff",
     openMenuButtonColor = "#fff",
     accentColor = "#5227FF",
@@ -484,7 +484,7 @@ export function StaggeredMenu({
             >
                 <div className="sm-logo" aria-label="Logo">
                     <Image
-                        src={logoUrl || "/logo.svg"}
+                        src={logoUrl || "/logo.png"}
                         alt="XES"
                         className="sm-logo-img"
                         draggable={false}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { MobileStaggerNav } from "@/components/navbar/navbar-mobile";
+import { VolunteerModal } from "@/components/volunteer-modal";
 
 const links = [
     { href: "/about", label: "About" },
@@ -42,12 +43,7 @@ export function Navbar() {
                             </a>
                         ))}
                     </nav>
-                    <a
-                        href="/contact"
-                        className="text-xs font-bold uppercase tracking-tight text-foreground underline decoration-accent decoration-2 underline-offset-4 md:text-sm"
-                    >
-                        Book
-                    </a>
+                    <VolunteerModal />
                 </div>
             </header>
             <MobileStaggerNav />
