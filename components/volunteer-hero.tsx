@@ -49,8 +49,8 @@ const IMAGES_3 = pickColumn(6)
               </p>
             </ContainerAnimated>
 
-            <ContainerAnimated className="mt-6">
-              <VolunteerApplyButton className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-8 text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-md transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+            <ContainerAnimated className="mt-10">
+              <VolunteerApplyButton className="cursor-pointer inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-8 text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-md transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                 Become a Volunteer
               </VolunteerApplyButton>
             </ContainerAnimated>

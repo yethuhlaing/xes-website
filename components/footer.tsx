@@ -317,7 +317,7 @@ export function CtaBand() {
                             <button
                                 type="button"
                                 onClick={openMemberApplication}
-                                className="inline-flex touch-manipulation items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-9 sm:py-4 sm:text-base"
+                                className="cursor-pointer inline-flex touch-manipulation items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-9 sm:py-4 sm:text-base"
                             >
                                 Become a Member
                             </button>

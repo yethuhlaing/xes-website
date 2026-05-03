@@ -22,6 +22,7 @@ if (typeof window !== "undefined") {
 type Section = {
   id?: string;
   background: string;
+  overlay?: string;
   leftLabel?: ReactNode;
   /** Use a string for centered kinetic type; `<></>` renders nothing; custom JSX skips per-word GSAP */
   title: string | ReactNode;
@@ -126,7 +127,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
       colors = {
         text: "rgba(245,245,245,0.92)",
-        overlay: "rgba(0,0,0,0.35)",
+        overlay: "rgba(0,0,0,0.38)",
         pageBg: "#ffffff",
         stageBg: "#000000",
       },
@@ -278,6 +279,12 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
       const prevBg = bgRefs.current[from];
       const newBg = bgRefs.current[to];
+
+      // kill any lingering intermediate backgrounds
+      bgRefs.current.forEach((bg, i) => {
+        if (bg && i !== from && i !== to) gsap.set(bg, { opacity: 0, scale: 1, yPercent: 0, clipPath: "none" });
+      });
+
       if (bgTransition === "fade") {
         if (newBg) {
           gsap.set(newBg, { opacity: 0, scale: 1.04, yPercent: down ? 1 : -1 });
@@ -336,7 +343,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
         end: () => "+=" + scrollSpan,
         pin: true,
         pinSpacing: true,
-        onUpdate: (self) => {
+        onUpdate: (self: ScrollTrigger) => {
           if (total <= 1) return;
           const idx = Math.min(total - 1, Math.floor(self.progress * total + 1e-6));
           changeSectionRef.current(idx);
@@ -450,7 +457,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
                           alt=""
                           className="fx-bg-img"
                         />
-                        <div className="fx-bg-overlay" />
+                        <div className="fx-bg-overlay" style={s.overlay ? { background: s.overlay } : undefined} />
                       </>
                     )}
                   </div>
@@ -587,7 +594,6 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-bg-img {
             position: absolute; inset: -10% 0 -10% 0;
             width: 100%; height: 120%; object-fit: cover;
-            filter: brightness(0.8);
             opacity: 0;
             will-change: transform, opacity;
           }

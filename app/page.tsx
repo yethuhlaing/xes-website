@@ -13,6 +13,7 @@ const sections = [
       title: "Spark Ideas",
       rightLabel: "Curious",
       background: "/images/1.JPG",
+      overlay: "rgba(0,0,0,0.12)",
       audioSrc: "/sfx/click-01.mp3",
     },
     {
