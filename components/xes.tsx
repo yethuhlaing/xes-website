@@ -29,7 +29,7 @@ export function AboutSection() {
                             className={
                                 isLeft
                                     ? "mr-auto w-full max-w-[min(100%,42rem)] md:max-w-[min(100%,50rem)]"
-                                    : "ml-auto w-full max-w-[min(100%,42rem)] text-right md:max-w-[min(100%,50rem)] text-secondary"
+                                    : "ml-auto w-full max-w-[min(100%,42rem)] text-right md:max-w-[min(100%,50rem)] text-primary"
                             }
                         >
                             <ScrollReveal
