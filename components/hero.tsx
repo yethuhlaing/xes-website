@@ -166,24 +166,24 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
     }, []);
     const motionOff = reduceMotion ?? prefersReduced;
 
-    // Split words for center title
-    const tempWordBucket = useRef<HTMLSpanElement[]>([]);
-    const splitWords = (text: string) => {
-      tempWordBucket.current = [];
+    // Split words for center title — refs are populated during commit phase,
+    // before useLayoutEffect, so GSAP init always sees populated wordRefs.
+    const splitWords = (text: string, sIdx: number) => {
       const words = text.split(/\s+/).filter(Boolean);
       return words.map((w, i) => (
         <span className="fx-word-mask" key={i}>
-          <span className="fx-word" ref={(el) => { if (el) tempWordBucket.current.push(el); }}>{w}</span>
+          <span
+            className="fx-word"
+            ref={(el) => {
+              if (el) {
+                if (!wordRefs.current[sIdx]) wordRefs.current[sIdx] = [];
+                wordRefs.current[sIdx][i] = el;
+              }
+            }}
+          >{w}</span>
           {i < words.length - 1 ? " " : null}
         </span>
       ));
-    };
-    const WordsCollector = ({ onReady }: { onReady: () => void }) => {
-      useEffect(() => {
-        onReady();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
-      return null;
     };
 
     // Align lists: center active row
@@ -490,18 +490,8 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
                       return (
                         <div key={`C-${s.id ?? sIdx}`} className={`fx-featured ${sIdx === index ? "active" : ""}`}>
                           <h3 className="fx-featured-title">
-                            {isString ? splitWords(s.title as string) : s.title}
+                            {isString ? splitWords(s.title as string, sIdx) : s.title}
                           </h3>
-                          <WordsCollector
-                            onReady={() => {
-                              if (isString) {
-                                wordRefs.current[sIdx] = [...tempWordBucket.current];
-                              } else {
-                                wordRefs.current[sIdx] = [];
-                              }
-                              tempWordBucket.current = [];
-                            }}
-                          />
                         </div>
                       );
                     })}

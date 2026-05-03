@@ -1,8 +1,5 @@
 "use client";
 
-import { ReactLenis, useLenis } from "lenis/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
     motion,
     useMotionTemplate,
@@ -10,24 +7,7 @@ import {
     useTransform,
 } from "framer-motion";
 import { ArrowRight, MapPin, Rocket } from "lucide-react";
-import React, { useEffect, useRef } from "react";
-
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
-
-/** Syncs GSAP ScrollTrigger with Lenis scroll — must live inside ReactLenis context. */
-function LenisGSAPBridge() {
-    const lenis = useLenis();
-
-    useEffect(() => {
-        if (!lenis) return;
-        lenis.on("scroll", ScrollTrigger.update);
-        return () => { lenis.off("scroll", ScrollTrigger.update); };
-    }, [lenis]);
-
-    return null;
-}
+import React, { useRef } from "react";
 
 type ParallaxImgProps = {
     className: string;
@@ -57,15 +37,12 @@ const GALLERY_IMAGES = [
 
 export default function Gallery() {
     return (
-        <ReactLenis root>
-            <LenisGSAPBridge />
-            <div className="bg-background">
-                <Hero />
-                <Schedule />
-            </div>
-        </ReactLenis>
+        <div className="bg-background">
+            <Hero />
+            <Schedule />
+        </div>
     );
-};
+}
 
 const Hero = () => {
     const ref = useRef<HTMLDivElement>(null);

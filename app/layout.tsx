@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} h-full scroll-smooth`}>
+    <html lang="en" className={`${spaceGrotesk.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
         <AppProviders>
           <div className="relative isolate flex min-h-full flex-1 flex-col overflow-x-clip">
