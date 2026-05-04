@@ -1,12 +1,9 @@
 import {
   ContainerAnimated,
-  ContainerScroll,
   ContainerStagger,
-  ContainerSticky,
-  GalleryCol,
-  GalleryContainer,
 } from "@/components/animated-gallery";
 import { VolunteerApplyButton } from "@/components/volunteer-apply-button";
+import { VolunteerHeroGallery } from "@/components/volunteer-hero-gallery";
 
 /** All files in `public/images/` — used only for the scroll gallery (12 slots, 7 unique). */
 const LOCAL_GALLERY_IMAGES = [
@@ -28,7 +25,7 @@ const IMAGES_3 = pickColumn(6)
   export const VolunteerHero = () => {
     return (
       <div className="relative">
-        <div className="relative z-[9999] -mb-24 flex min-h-[62dvh] flex-col items-center justify-center px-6 pb-6 md:min-h-[58dvh] md:-translate-y-10">
+        <div className="relative z-20 -mb-24 flex min-h-[62dvh] flex-col items-center justify-center px-6 pb-6 md:min-h-[58dvh] md:-translate-y-10">
           <ContainerStagger className="max-w-2xl text-center">
             <ContainerAnimated>
               <h1 className="font-serif text-4xl font-extralight text-foreground md:text-5xl">
@@ -72,45 +69,7 @@ const IMAGES_3 = pickColumn(6)
           />
         </div>
   
-        <ContainerScroll className="relative h-[350vh]">
-          <ContainerSticky className="h-svh">
-            <GalleryContainer className="">
-              <GalleryCol yRange={["-10%", "2%"]} className="-mt-2">
-                {IMAGES_1.map((imageUrl) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={imageUrl}
-                    className="aspect-video block h-auto max-h-full w-full  rounded-md  object-cover shadow"
-                    src={imageUrl}
-                    alt="gallery item"
-                  />
-                ))}
-              </GalleryCol>
-              <GalleryCol className="mt-[-50%]" yRange={["15%", "5%"]}>
-                {IMAGES_2.map((imageUrl) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={imageUrl}
-                    className="aspect-video block h-auto max-h-full w-full  rounded-md  object-cover shadow"
-                    src={imageUrl}
-                    alt="gallery item"
-                  />
-                ))}
-              </GalleryCol>
-              <GalleryCol yRange={["-10%", "2%"]} className="-mt-2">
-                {IMAGES_3.map((imageUrl) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={imageUrl}
-                    className="aspect-video block h-auto max-h-full w-full  rounded-md  object-cover shadow"
-                    src={imageUrl}
-                    alt="gallery item"
-                  />
-                ))}
-              </GalleryCol>
-            </GalleryContainer>
-          </ContainerSticky>
-        </ContainerScroll>
+        <VolunteerHeroGallery images1={IMAGES_1} images2={IMAGES_2} images3={IMAGES_3} />
       </div>
     )
   }

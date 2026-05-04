@@ -102,21 +102,39 @@ export const ContainerSticky = ({
 }
 ContainerSticky.displayName = "ContainerSticky"
 
+type GalleryContainerProps = React.HTMLAttributes<HTMLDivElement> &
+  HTMLMotionProps<"div"> & {
+    /** Scroll segment [start, end] for rotateX interpolation (0–1 progress). */
+    rotateXScroll?: [number, number]
+    /** Degrees at start / end of rotateX segment. */
+    rotateXDegrees?: [number, number]
+    scaleScroll?: [number, number]
+    scaleOutput?: [number, number]
+  }
+
 export const GalleryContainer = ({
   children,
   className,
   style,
+  rotateXScroll = [0, 0.5],
+  rotateXDegrees = [75, 0],
+  scaleScroll = [0.5, 0.9],
+  scaleOutput = [1.2, 1],
   ...props
-}: React.HTMLAttributes<HTMLDivElement> & HTMLMotionProps<"div">) => {
+}: GalleryContainerProps) => {
   const { scrollYProgress } = useContainerScrollContext()
-  const rotateX = useTransform(scrollYProgress, [0, 0.5], [75, 0])
-  const scale = useTransform(scrollYProgress, [0.5, 0.9], [1.2, 1])
+  const rotateX = useTransform(
+    scrollYProgress,
+    rotateXScroll,
+    rotateXDegrees,
+  )
+  const scale = useTransform(scrollYProgress, scaleScroll, scaleOutput)
 
   return (
     <motion.div
       className={cn(
-        "relative grid size-full grid-cols-3 gap-2 rounded-2xl",
-        className
+        "relative grid size-full grid-cols-3 gap-1.5 rounded-xl md:gap-2 md:rounded-2xl",
+        className,
       )}
       style={{
         rotateX,

@@ -1,10 +1,4 @@
-"use client";
-
 import { Users2, Award, GraduationCap, Lightbulb, Target, Clock, Compass, type LucideIcon } from "lucide-react";
-import TextBlockAnimation from "@/components/text-block-animation";
-
-/** Matches `text-primary-foreground` on `bg-primary` cards — reveal reads on-brand. */
-const BLOCK_COLOR = "hsl(var(--primary-foreground))";
 
 type Benefit = {
     title: string;
@@ -59,29 +53,15 @@ export function WhatsInItForYou() {
         >
             <div className="mx-auto w-full max-w-[95vw] px-4 md:px-8">
                 <div className="mb-16 max-w-5xl">
-                    <TextBlockAnimation
-                        animateOnScroll
-                        blockColor={BLOCK_COLOR}
-                        duration={0.4}
-                        stagger={0.03}
+                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground md:text-sm">
+                        For volunteers
+                    </p>
+                    <h2
+                        id="whats-in-it-heading"
+                        className="mt-4 text-[clamp(2.5rem,8vw,6rem)] font-bold uppercase leading-[0.85] tracking-tighter text-foreground"
                     >
-                        <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground md:text-sm">
-                            For volunteers
-                        </p>
-                    </TextBlockAnimation>
-                    <TextBlockAnimation
-                        animateOnScroll
-                        blockColor={BLOCK_COLOR}
-                        duration={0.44}
-                        stagger={0.025}
-                    >
-                        <h2
-                            id="whats-in-it-heading"
-                            className="mt-4 text-[clamp(2.5rem,8vw,6rem)] font-bold uppercase leading-[0.85] tracking-tighter text-foreground"
-                        >
-                            What&apos;s in it for you?
-                        </h2>
-                    </TextBlockAnimation>
+                        What&apos;s in it for you?
+                    </h2>
                 </div>
 
                 <div className="relative space-y-10 pb-32 md:space-y-14 md:pb-40">
@@ -112,30 +92,16 @@ export function WhatsInItForYou() {
 
                                 {/* Col 2: Title */}
                                 <div className="flex items-start">
-                                    <TextBlockAnimation
-                                        animateOnScroll
-                                        blockColor={BLOCK_COLOR}
-                                        duration={0.42}
-                                        stagger={0.028}
-                                    >
-                                        <h3 className="text-2xl font-bold uppercase leading-tight tracking-tighter text-primary-foreground md:text-4xl lg:text-5xl">
-                                            {item.title}
-                                        </h3>
-                                    </TextBlockAnimation>
+                                    <h3 className="text-2xl font-bold uppercase leading-tight tracking-tighter text-primary-foreground md:text-4xl lg:text-5xl">
+                                        {item.title}
+                                    </h3>
                                 </div>
 
                                 {/* Col 3: Body */}
                                 <div className="flex items-start md:pt-1">
-                                    <TextBlockAnimation
-                                        animateOnScroll
-                                        blockColor={BLOCK_COLOR}
-                                        duration={0.38}
-                                        stagger={0.02}
-                                    >
-                                        <p className="text-lg font-medium leading-tight tracking-tight text-primary-foreground/80 md:text-xl">
-                                            {item.body}
-                                        </p>
-                                    </TextBlockAnimation>
+                                    <p className="text-lg font-medium leading-tight tracking-tight text-primary-foreground/80 md:text-xl">
+                                        {item.body}
+                                    </p>
                                 </div>
                             </div>
                         </article>

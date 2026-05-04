@@ -50,20 +50,20 @@ export function Testimonials() {
         <div className="mx-auto w-full max-w-6xl px-4 py-20 md:py-24">
             <div className="grid min-h-[min(72vh,38rem)] w-full grid-rows-[1fr_auto] text-center sm:min-h-[min(68vh,40rem)]">
                 <div className="relative flex min-h-[12rem] w-full flex-col items-center justify-center self-stretch px-8 py-6 sm:min-h-[14rem] sm:py-8">
-                    <span className="pointer-events-none absolute -left-3 -top-4 select-none font-serif text-8xl text-primary md:-top-8 md:text-9xl">
+                    <span className="pointer-events-none absolute -left-2 -top-2 select-none font-serif text-6xl text-primary sm:text-7xl md:-left-3 md:-top-8 md:text-9xl">
                         "
                     </span>
 
                     <p
                         className={cn(
-                            "max-w-4xl text-center text-[1.55rem] font-medium leading-relaxed text-foreground transition-all duration-300 ease-out md:text-4xl md:leading-[1.25]",
+                            "max-w-4xl text-center text-base font-medium leading-relaxed text-foreground transition-all duration-300 ease-out sm:text-lg md:text-4xl md:leading-[1.25]",
                             isAnimating ? "scale-[0.98] opacity-0 blur-sm" : "scale-100 opacity-100 blur-0",
                         )}
                     >
                         {displayedQuote}
                     </p>
 
-                    <span className="pointer-events-none absolute -bottom-6 -right-3 select-none font-serif text-8xl text-primary md:-bottom-10 md:text-9xl">
+                    <span className="pointer-events-none absolute -bottom-4 -right-2 select-none font-serif text-6xl text-primary sm:text-7xl md:-bottom-10 md:-right-3 md:text-9xl">
                         "
                     </span>
                 </div>
@@ -71,7 +71,7 @@ export function Testimonials() {
                 <div className="flex shrink-0 flex-col items-center gap-7 pt-8 pb-1 ">
                     <p
                         className={cn(
-                            "text-sm uppercase tracking-[0.16em] text-muted-foreground transition-all duration-500 ease-out md:text-base",
+                            "text-xs uppercase tracking-[0.16em] text-muted-foreground transition-all duration-500 ease-out sm:text-sm md:text-base",
                             isAnimating ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100",
                         )}
                     >
@@ -119,7 +119,7 @@ export function Testimonials() {
                                         <div className="overflow-hidden">
                                             <span
                                                 className={cn(
-                                                    "block whitespace-nowrap text-base font-semibold transition-colors duration-300 md:text-lg",
+                                                    "block whitespace-nowrap text-sm font-semibold transition-colors duration-300 sm:text-base md:text-lg",
                                                     isActive ? "text-background" : "text-foreground",
                                                 )}
                                             >
