@@ -141,14 +141,14 @@ export function VolunteerTestimonials({
                             leaveTo="z-0 opacity-0 -translate-x-3"
                         >
                             <div className="flex flex-col items-center gap-5">
-                                <p className="text-4xl font-bold leading-snug text-foreground before:content-['\201C'] after:content-['\201D']">
+                                <p className="text-xl font-bold leading-snug text-foreground sm:text-2xl md:text-3xl lg:text-4xl before:content-['\201C'] after:content-['\201D']">
                                     {testimonial.quote}
                                 </p>
                                 <div className="flex flex-col gap-0.5 text-center">
-                                    <span className="text-base font-semibold tracking-tight text-foreground">
+                                    <span className="text-sm font-semibold tracking-tight text-foreground sm:text-base">
                                         {testimonial.name}
                                     </span>
-                                    <span className="text-sm font-normal text-foreground/70">
+                                    <span className="text-xs font-normal text-foreground/70 sm:text-sm">
                                         {testimonial.role}
                                     </span>
                                 </div>
