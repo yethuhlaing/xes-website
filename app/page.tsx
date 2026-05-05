@@ -51,9 +51,18 @@ export default function Home() {
                 cta={
                   <a
                     href="/membership"
-                    className="inline-flex shrink-0 items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-primary-foreground shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:px-5 md:text-sm"
+                    className="group relative inline-flex w-60 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary px-10 py-4 text-base font-semibold uppercase tracking-widest text-primary-foreground shadow-md transition-all duration-300 ease-out hover:shadow-xl hover:shadow-primary/30 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:w-72 md:py-5 md:text-lg"
                   >
-                    Become a Member
+                    <span className="relative flex h-[1.4em] w-full items-center justify-center overflow-hidden">
+                      <span className="flex items-center gap-2 transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                        Join XES
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                      </span>
+                      <span className="absolute inset-0 flex translate-y-full items-center justify-center gap-2 transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+                        Join XES
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                      </span>
+                    </span>
                   </a>
                 }
                 showProgress

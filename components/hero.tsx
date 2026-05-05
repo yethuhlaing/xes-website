@@ -528,6 +528,11 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
                         </div>
                       );
                     })}
+                    {cta && (
+                      <div className="fx-center-cta" aria-label="Call to action">
+                        {cta}
+                      </div>
+                    )}
                   </div>
 
                   {/* Right list — only rendered when sections provide rightLabel */}
@@ -568,11 +573,6 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
                   )}
                 </div>
               </div>
-              {cta && (
-                <div className="fx-cta" aria-label="Call to action">
-                  {cta}
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -661,6 +661,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
             align-items: center;
             height: 100%;
             padding: 0 var(--fx-grid-px);
+            pointer-events: none;
           }
           .fx-content.no-right {
             grid-template-columns: 1fr 1.3fr;
@@ -687,6 +688,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
             font-size: clamp(1rem, 2.4vw, 1.8rem);
             user-select: none;
             cursor: pointer;
+            pointer-events: auto;
           }
           .fx-left-item.active, .fx-right-item.active { opacity: 1; }
           .fx-left-item.active { transform: translateX(10px); padding-left: 20px; border-left: 3px solid var(--fx-accent); }
@@ -705,15 +707,15 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
             display: grid; place-items: center; text-align: center; height: 60vh; overflow: hidden;
             position: relative;
           }
-          .fx-cta {
+          .fx-center-cta {
             position: absolute;
-            bottom: calc(5vh + 2.5rem);
-            left: 0; right: 0;
-            display: flex; justify-content: center;
+            top: calc(50% + 5rem);
+            right: var(--fx-grid-px);
+            display: flex; justify-content: flex-end;
             z-index: 10;
             pointer-events: none;
           }
-          .fx-cta > * { pointer-events: auto; }
+          :global(.fx-center-cta > *) { pointer-events: auto; }
           .fx-featured { position: absolute; opacity: 0; visibility: hidden; }
           .fx-featured.active { opacity: 1; visibility: visible; }
           .fx-featured-title {
