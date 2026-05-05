@@ -60,6 +60,7 @@ export type FullScreenFXProps = {
   fontFamily?: string;
   header?: ReactNode;
   footer?: ReactNode;
+  cta?: ReactNode;
   gap?: number;           // rem
   gridPaddingX?: number;  // rem
 
@@ -106,6 +107,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
       fontFamily = '"Rubik Wide", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
       header,
       footer,
+      cta,
       gap = 1,
       gridPaddingX = 2,
 
@@ -138,6 +140,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
     ref
   ) => {
     const total = sections.length;
+    const hasRightLabels = sections.some((s) => s.rightLabel != null);
     const [localIndex, setLocalIndex] = useState(clamp(initialIndex, 0, Math.max(0, total - 1)));
     const isControlled = typeof currentIndex === "number";
     const index = isControlled ? clamp(currentIndex!, 0, Math.max(0, total - 1)) : localIndex;
@@ -156,6 +159,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
     const progressFillRef = useRef<HTMLDivElement | null>(null);
     const currentNumberRef = useRef<HTMLSpanElement | null>(null);
+    const headerRef = useRef<HTMLDivElement | null>(null);
 
     const lastIndexRef = useRef(index);
     const pinScrollTriggerRef = useRef<ScrollTrigger | null>(null);
@@ -238,11 +242,15 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
       lastIndexRef.current = to;
       const down = to > from;
 
-      // Commit active section before GSAP: otherwise `.fx-featured.active` still
-      // points at `from` while outgoing words fade and `to` stays visibility:hidden.
-      flushSync(() => {
-        if (!isControlled) setLocalIndex(to);
-      });
+      // ScrollTrigger's onUpdate can run synchronously while React is still in
+      // useLayoutEffect (or otherwise mid-commit). flushSync there throws; defer
+      // so state commit + GSAP run after the current React task finishes.
+      queueMicrotask(() => {
+        // Commit active section before GSAP: otherwise `.fx-featured.active` still
+        // points at `from` while outgoing words fade and `to` stays visibility:hidden.
+        flushSync(() => {
+          if (!isControlled) setLocalIndex(to);
+        });
 
       const killTargets: object[] = [
         ...bgRefs.current.filter(Boolean),
@@ -310,6 +318,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
         gsap.to(el, { opacity: i === to ? 1 : 0.35, x: i === to ? -10 : 0, duration: D * 0.6, ease: "power3.out" });
       });
 
+      });
     };
 
     const changeSectionRef = useRef(changeSection);
@@ -390,6 +399,18 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
     // click/hover on list items
     const handleJump = (i: number) => goTo(i);
     const handleLoadedStagger = () => {
+      // soft entrance for header lines (e.g. Student / Founders) — match left-column stagger
+      const headerRoot = headerRef.current;
+      if (headerRoot) {
+        const lines = Array.from(headerRoot.children) as HTMLElement[];
+        lines.forEach((el, i) => {
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, delay: i * 0.06, ease: "power3.out" }
+          );
+        });
+      }
       // soft entrance for lists at mount
       leftItemRefs.current.forEach((el, i) => {
         gsap.fromTo(
@@ -424,6 +445,7 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
       ["--fx-gap" as any]: `${gap}rem`,
       ["--fx-grid-px" as any]: `${gridPaddingX}rem`,
       ["--fx-row-gap" as any]: "10px",
+      ["--fx-accent" as any]: "#7c3aed",
     };
 
     return (
@@ -467,10 +489,14 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
               {/* Grid */}
               <div className="fx-grid">
                 {/* Header */}
-                {header && <div className="fx-header">{header}</div>}
+                {header && (
+                  <div className="fx-header" ref={headerRef}>
+                    {header}
+                  </div>
+                )}
 
                 {/* Content (lists + center) */}
-                <div className="fx-content">
+                <div className={`fx-content${hasRightLabels ? "" : " no-right"}`}>
                   {/* Left list */}
                   <div className="fx-left" role="list">
                     <div className="fx-track" ref={leftTrackRef}>
@@ -504,24 +530,26 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
                     })}
                   </div>
 
-                  {/* Right list */}
-                  <div className="fx-right" role="list">
-                    <div className="fx-track" ref={rightTrackRef}>
-                      {sections.map((s, i) => (
-                        <div
-                          key={`R-${s.id ?? i}`}
-                          className={`fx-item fx-right-item ${i === index ? "active" : ""}`}
-                          ref={(el) => { if (el) rightItemRefs.current[i] = el; }}
-                          onClick={() => handleJump(i)}
-                          role="button"
-                          tabIndex={0}
-                          aria-pressed={i === index}
-                        >
-                          {s.rightLabel}
-                        </div>
-                      ))}
+                  {/* Right list — only rendered when sections provide rightLabel */}
+                  {hasRightLabels && (
+                    <div className="fx-right" role="list">
+                      <div className="fx-track" ref={rightTrackRef}>
+                        {sections.map((s, i) => (
+                          <div
+                            key={`R-${s.id ?? i}`}
+                            className={`fx-item fx-right-item ${i === index ? "active" : ""}`}
+                            ref={(el) => { if (el) rightItemRefs.current[i] = el; }}
+                            onClick={() => handleJump(i)}
+                            role="button"
+                            tabIndex={0}
+                            aria-pressed={i === index}
+                          >
+                            {s.rightLabel}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Footer + progress */}
@@ -540,6 +568,11 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
                   )}
                 </div>
               </div>
+              {cta && (
+                <div className="fx-cta" aria-label="Call to action">
+                  {cta}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -629,6 +662,9 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
             height: 100%;
             padding: 0 var(--fx-grid-px);
           }
+          .fx-content.no-right {
+            grid-template-columns: 1fr 1.3fr;
+          }
 
           .fx-left, .fx-right {
             height: 60vh; /* gives us room to center the active row */
@@ -653,21 +689,31 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
             cursor: pointer;
           }
           .fx-left-item.active, .fx-right-item.active { opacity: 1; }
-          .fx-left-item.active { transform: translateX(10px); padding-left: 16px; }
+          .fx-left-item.active { transform: translateX(10px); padding-left: 20px; border-left: 3px solid var(--fx-accent); }
           .fx-right-item.active { transform: translateX(-10px); padding-right: 16px; }
 
           .fx-left-item.active::before,
           .fx-right-item.active::after {
             content: "";
             position: absolute; top: 50%; transform: translateY(-50%);
-            width: 6px; height: 6px; background: var(--fx-text); border-radius: 50%;
+            width: 6px; height: 6px; background: var(--fx-accent); border-radius: 50%;
           }
-          .fx-left-item.active::before { left: 0; }
+          .fx-left-item.active::before { left: -3px; }
           .fx-right-item.active::after { right: 0; }
 
           .fx-center {
             display: grid; place-items: center; text-align: center; height: 60vh; overflow: hidden;
+            position: relative;
           }
+          .fx-cta {
+            position: absolute;
+            bottom: calc(5vh + 2.5rem);
+            left: 0; right: 0;
+            display: flex; justify-content: center;
+            z-index: 10;
+            pointer-events: none;
+          }
+          .fx-cta > * { pointer-events: auto; }
           .fx-featured { position: absolute; opacity: 0; visibility: hidden; }
           .fx-featured.active { opacity: 1; visibility: visible; }
           .fx-featured-title {
@@ -676,8 +722,8 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
             font-weight: 900; letter-spacing: -0.01em;
             font-size: clamp(2rem, 7.5vw, 6rem);
           }
-          .fx-word-mask { display: inline-block; overflow: hidden; vertical-align: middle; }
-          .fx-word { display: inline-block; vertical-align: middle; }
+          .fx-word-mask { display: inline-block; overflow: hidden; vertical-align: middle; white-space: nowrap; }
+          .fx-word { display: inline-block; vertical-align: middle; white-space: nowrap; }
 
           .fx-footer {
             grid-column: 1 / 13; align-self: end; padding-bottom: 5vh; text-align: center;
@@ -688,7 +734,8 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-progress-numbers { position: absolute; inset: auto 0 100% 0; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--fx-text); }
 
           @media (max-width: 900px) {
-            .fx-content {
+            .fx-content,
+            .fx-content.no-right {
               grid-template-columns: 1fr;
               place-items: center;
             }
@@ -697,12 +744,17 @@ export const HeroSection = forwardRef<HTMLDivElement, FullScreenFXProps>(
               height: 100%;
               width: 100%;
             }
+            .fx-featured {
+              width: 100%;
+              padding: 0 1.5rem;
+              box-sizing: border-box;
+            }
             .fx-featured-title {
-              font-size: clamp(2.8rem, 13vw, 5rem);
-              padding: 0 1rem;
+              font-size: clamp(1.8rem, 9vw, 4rem);
+              padding: 0;
             }
             .fx-header {
-              font-size: clamp(2.2rem, 11vw, 5rem);
+              font-size: clamp(2rem, 10vw, 5rem);
               padding-top: max(calc(env(safe-area-inset-top, 0px) + 4rem), 12vh);
             }
           }

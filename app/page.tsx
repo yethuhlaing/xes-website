@@ -11,45 +11,33 @@ const sections = [
     {
       leftLabel: "Curious",
       title: "Spark Ideas",
-      rightLabel: "Curious",
       background: "/images/1.JPG",
       overlay: "rgba(0,0,0,0.12)",
-      audioSrc: "/sfx/click-01.mp3",
     },
     {
       leftLabel: "Learn",
       title: "Ship Fast",
-      rightLabel: "Learn",
       background: "/images/2.jpg",
-      audioSrc: "/sfx/whoosh-02.mp3",
     },
     {
       leftLabel: "Peers",
       title: "Team Up",
-      rightLabel: "Peers",
       background: "/images/3.JPG",
-      audioSrc: "/sfx/whoosh-02.mp3",
     },
     {
       leftLabel: "Pitch",
       title: "Convince",
-      rightLabel: "Pitch",
       background: "/images/4.jpg",
-      audioSrc: "/sfx/whoosh-02.mp3",
     },
     {
       leftLabel: "Grow",
       title: "Scale Up",
-      rightLabel: "Grow",
       background: "/images/5.jpg",
-      audioSrc: "/sfx/whoosh-02.mp3",
     },
     {
       leftLabel: "Belong",
       title: "Founders First",
-      rightLabel: "Belong",
       background: "/images/6.jpg",
-      audioSrc: "/sfx/whoosh-02.mp3",
     },
   ];
 
@@ -60,6 +48,14 @@ export default function Home() {
                 sections={ sections }
                 header={<><div>Student</div><div>Founders</div></>}
                 footer={<div></div>}
+                cta={
+                  <a
+                    href="/membership"
+                    className="inline-flex shrink-0 items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-primary-foreground shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:px-5 md:text-sm"
+                  >
+                    Become a Member
+                  </a>
+                }
                 showProgress
                 scrollPxPerSection={120}
                 durations={{ change: 0.3, bg: 0.16, snap: 280 }}

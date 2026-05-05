@@ -6,8 +6,7 @@ export default function WhoAreWe() {
       <div className="flex-1 flex flex-col">
         {/* md: subtract sticky header (h-16) so hero + navbar = one viewport and content stays visually centered */}
         <section className="flex min-h-[100dvh] flex-col items-center justify-center px-6 md:min-h-[calc(100dvh-4rem)]">
-          <div className="max-w-4xl w-full">
-            <TextBlockAnimation
+        <TextBlockAnimation
               blockColor="#6366f1"
               animateOnScroll={false}
               delay={0.2}
@@ -20,7 +19,6 @@ export default function WhoAreWe() {
                 </span>
               </h1>
             </TextBlockAnimation>
-          </div>
         </section>
 
         <section className="min-h-[80vh] flex flex-col justify-center items-center px-6 py-24 bg-primary">
