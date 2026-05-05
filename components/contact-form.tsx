@@ -31,7 +31,7 @@ export function ContactForm({ headingId }: { headingId?: string }) {
                     message,
                     _subject: "General contact — XES website",
                     _captcha: "false",
-                    _template: "box",
+                    _template: "table",
                 }),
             });
 

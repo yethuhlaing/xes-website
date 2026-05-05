@@ -31,7 +31,7 @@ export function VolunteerForm({ headingId }: { headingId?: string } = {}) {
                     phone,
                     _subject: "New Volunteer Registration",
                     _captcha: "false",
-                    _template: "box",
+                    _template: "table",
                 }),
             });
 
